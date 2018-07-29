@@ -53,3 +53,29 @@ while(i <= 100){ //조건식
 console.log(sum);
 ```
 
+
+
+
+
+#### for문과 while문의 예시 (런코)
+
+```javascript
+//for
+var result = 0;
+var i = 0;
+for(var i = 1; i <= 100; i+=1){
+  // i는 1부터 시작하고 100이라면 1씩 더한다
+    result += i;// result에 i를 더한다
+}
+
+//--------------------------------
+
+//while
+var result = 0;	// result는 0이다
+var i = 1;		// i는 1이다
+while(i<=100){	// i가 100이하라면
+    result += i;// result에 i를 더한다
+    i+=1;		// i를 1 증가시킨다
+}
+```
+
