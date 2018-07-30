@@ -115,7 +115,7 @@
 
 
 
-### jQuery
+### jQuery!
 
 
 
@@ -622,7 +622,7 @@ $("input").blur(function(){
 
 
 
-### jQuery Effects
+### jQuery Effects!
 
 ##### (Hide and Show)
 
@@ -631,6 +631,10 @@ $("input").blur(function(){
 ---
 
 #### jQuery hide() and show()
+
+
+
+### Effect 중에 Hide and Show가 중요!!
 
 
 
@@ -726,7 +730,2570 @@ $("button").click(function(){
 | stop()        | Stops the currently running animation for the selected elements |
 | toggle()      | Toggles between the hide() and show() methods                |
 
+tip.
 
+*한 번씩 실행해보자!!*
+
+
+
+* ***animate()***
+
+(지정 애니메이션을 실행)
+
+```javascript
+$("button").click(function(){
+    $("#box").animate({height: "300px"});
+});//박스가 늘어난다
+```
+
+Examples:
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#btn1").click(function(){
+        $("#box").animate({height: "300px"});
+    });
+    $("#btn2").click(function(){
+        $("#box").animate({height: "100px"});
+    });
+});
+</script>
+</head>
+<body>
+
+<button id="btn1">Animate height</button>
+<button id="btn2">Reset height</button>
+
+<div id="box" style="background:#98bf21;height:100px;width:100px;margin:6px;"></div>
+
+</body>
+</html>
+```
+
+
+
+* ***clearQueue()***
+
+(선택한 요소에서 대기 열에 있는 나머지 기능을 모두 제거)
+
+```javascript
+$("button").click(function(){
+    $("div").clearQueue();
+});//기능을 정지?
+```
+
+Examples:
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+    $("#start").click(function(){
+        $("div").animate({height: 300}, 1500);
+        $("div").animate({width: 300}, 1500);
+        $("div").animate({height: 100}, 1500);
+        $("div").animate({width: 100}, 1500);
+    });
+    $("#stop").click(function(){
+        $("div").clearQueue();
+    });
+});
+</script> 
+</head>
+<body>
+
+<button id="start">Start Animation</button>
+<button id="stop">Stop Animation</button>
+<br><br>
+
+<div style="background:red;height:100px;width:100px;"></div>
+ 
+</body>
+</html>
+```
+
+
+
+* ***delay***
+
+(선택한 요소에서 모든 대기 열 기능에 대한 지연을 설정합니다.)
+
+**"slow" / "fast" / 1000 = 1초**
+
+```javascript
+$("button").click(function(){
+    $("#div1").delay("slow").fadeIn();
+    $("#div2").delay("fast").fadeIn();
+});
+```
+
+Examples:
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("#div1").delay("slow").fadeIn();
+    $("#div2").delay("fast").fadeIn();
+    $("#div3").delay(800).fadeIn();
+    $("#div4").delay(2000).fadeIn();
+    $("#div5").delay(4000).fadeIn();
+  });
+});
+</script>
+</head>
+<body>
+
+<p>This example sets different speed values for the delay() method.</p>
+<button>Click to fade in boxes with a delay</button>
+<br><br>
+
+<div id="div1" style="width:90px;height:90px;display:none;background-color:black;"></div><br>
+<div id="div2" style="width:90px;height:90px;display:none;background-color:green;"></div><br>
+<div id="div3" style="width:90px;height:90px;display:none;background-color:blue;"></div><br>
+<div id="div4" style="width:90px;height:90px;display:none;background-color:red;"></div><br>
+<div id="div5" style="width:90px;height:90px;display:none;background-color:purple;"></div><br>
+
+</body>
+</html>
+```
+
+ 
+
+
+
+---
+
+---
+
+
+
+## 7강
+
+
+
+### jQuery Effects
+
+##### (Fading)
+
+
+
+* fadeIn()
+* fadeOut()
+* fadeToggle()
+* fadeTo()
+
+
+
+---
+
+
+
+* ***fadeIn()***
+
+**Syntax:**
+
+```javascript
+$(selector).fadeIn(speed, callback);
+```
+
+선택자 지정하고 페이드인을 한다.
+
+속도 지정하고 콜백
+
+
+
+Examples:
+
+```javascript
+$("button").click(function(){
+    $("#div1").fadeIn();
+    $("#div2").fadeIn("slow");
+    $("#div3").fadeIn(3000);
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#div1").fadeOut();
+        $("#div2").fadeOut("slow");
+        $("#div3").fadeOut(3000);
+    });
+});
+</script>
+</head>
+<body>
+
+<p>Demonstrate fadeOut() with different parameters.</p>
+
+<button>Click to fade out boxes</button><br><br>
+
+<div id="div1" style="width:80px;height:80px;background-color:red;"></div><br>
+<div id="div2" style="width:80px;height:80px;background-color:green;"></div><br>
+<div id="div3" style="width:80px;height:80px;background-color:blue;"></div>
+
+</body>
+</html>
+```
+
+
+
+* ***fadeOut()***
+
+**Syntax:**
+
+```javascript
+$(selector).fadeOut(speed, callback);
+```
+
+Examples:
+
+```javascript
+$("button").click(function(){
+    $("#div1").fadeOut();
+    $("#div2").fadeOut("slow");
+    $("#div3").fadeOut(3000);
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#div1").fadeOut();
+        $("#div2").fadeOut("slow");
+        $("#div3").fadeOut(3000);
+    });
+});
+</script>
+</head>
+<body>
+
+<p>Demonstrate fadeOut() with different parameters.</p>
+
+<button>Click to fade out boxes</button><br><br>
+
+<div id="div1" style="width:80px;height:80px;background-color:red;"></div><br>
+<div id="div2" style="width:80px;height:80px;background-color:green;"></div><br>
+<div id="div3" style="width:80px;height:80px;background-color:blue;"></div>
+
+</body>
+</html>
+```
+
+
+
+* ***fadeToggle()***
+
+**Syntax:**
+
+```javascript
+$(selector).fadeToggle(speed, callback);
+```
+
+토글은 스위치!!
+
+
+
+Examples:
+
+```javascript
+$("button").click(function(){
+    $("#div1").fadeToggle();
+    $("#div2").fadeToggle("slow");
+    $("#div3").fadeToggle(3000);
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#div1").fadeToggle();
+        $("#div2").fadeToggle("slow");
+        $("#div3").fadeToggle(3000);
+    });
+});
+</script>
+</head>
+<body>
+
+<p>Demonstrate fadeToggle() with different speed parameters.</p>
+
+<button>Click to fade in/out boxes</button><br><br>
+
+<div id="div1" style="width:80px;height:80px;background-color:red;"></div>
+<br>
+<div id="div2" style="width:80px;height:80px;background-color:green;"></div>
+<br>
+<div id="div3" style="width:80px;height:80px;background-color:blue;"></div>
+
+</body>
+</html>
+```
+
+
+
+* ***fadeTo()***
+
+**Syntax:**
+
+```javascript
+$(selector).fadeTo(speed,opacity,callback);
+```
+
+fadeTo()의 경우 opacity가 포함!!
+
+(opacity => 투명도(0에서 1사이))
+
+
+
+Examples:
+
+```javascript
+$("button").click(function(){
+    $("#div1").fadeTo("slow", 0.15);
+    $("#div2").fadeTo("slow", 0.4);
+    $("#div3").fadeTo("slow", 0.7);
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#div1").fadeTo("slow", 0.15);
+        $("#div2").fadeTo("slow", 0.4);
+        $("#div3").fadeTo("slow", 0.7);
+    });
+});
+</script>
+</head>
+<body>
+
+<p>Demonstrate fadeTo() with different parameters.</p>
+
+<button>Click to fade boxes</button><br><br>
+
+<div id="div1" style="width:80px;height:80px;background-color:red;"></div><br>
+<div id="div2" style="width:80px;height:80px;background-color:green;"></div><br>
+<div id="div3" style="width:80px;height:80px;background-color:blue;"></div>
+
+</body>
+</html>
+```
+
+
+
+
+
+---
+
+---
+
+
+
+## 8강
+
+
+
+### jQuery Effects
+
+##### (Sliding)
+
+
+
+* slideDown()
+* slideUp()
+* slideToggle()
+
+
+
+---
+
+
+
+* ***slideDown()***
+
+**Syntax:**
+
+```javascript
+$(selector).slideDown(speed,callback);
+```
+
+Examples:
+
+```javascript
+$("#flip").click(function(){
+    $("#panel").slideDown();
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+    $("#flip").click(function(){
+        $("#panel").slideDown("slow");
+    });
+});
+</script>
+ 
+<style> 
+#panel, #flip {
+    padding: 5px;
+    text-align: center;
+    background-color: #e5eecc;
+    border: solid 1px #c3c3c3;
+}
+
+#panel {
+    padding: 50px;
+    display: none;
+}
+</style>
+</head>
+<body>
+ 
+<div id="flip">Click to slide down panel</div>
+<div id="panel">Hello world!</div>
+
+</body>
+</html>
+```
+
+
+
+* ***slideUp()***
+
+**Syntax:**
+
+```javascript
+$(selector).slideUp(speed,callback);
+```
+
+Examples:
+
+```javascript
+$("#flip").click(function(){
+    $("#panel").slideUp();
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+    $("#flip").click(function(){
+        $("#panel").slideUp("slow");
+    });
+});
+</script>
+ 
+<style> 
+#panel, #flip {
+    padding: 5px;
+    text-align: center;
+    background-color: #e5eecc;
+    border: solid 1px #c3c3c3;
+}
+
+#panel {
+    padding: 50px;
+}
+</style>
+</head>
+<body>
+ 
+<div id="flip">Click to slide up panel</div>
+<div id="panel">Hello world!</div>
+
+</body>
+</html>
+```
+
+
+
+* ***slideToggle()***
+
+**Syntax:**
+
+```javascript
+$(selector).slideToggle(speed,callback);
+```
+
+토글은 스위치!!
+
+
+
+Examples:
+
+```javascript
+$("#flip").click(function(){
+    $("#panel").slideToggle();
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+    $("#flip").click(function(){
+        $("#panel").slideToggle("slow");
+    });
+});
+</script>
+
+<style> 
+#panel, #flip {
+    padding: 5px;
+    text-align: center;
+    background-color: #e5eecc;
+    border: solid 1px #c3c3c3;
+}
+
+#panel {
+    padding: 50px;
+    display: none;
+}
+</style>
+</head>
+<body>
+ 
+<div id="flip">Click to slide the panel down or up</div>
+<div id="panel">Hello world!</div>
+
+</body>
+</html>
+```
+
+
+
+
+
+---
+
+---
+
+
+
+## 9강
+
+
+
+### jQuery Effects
+
+##### (Animation)
+
+
+
+* ***animate()***
+
+**Syntax:**
+
+```javascript
+$(selector).animate({params},speed,callback);
+```
+
+Examples:
+
+```javascript
+$("button").click(function(){
+    $("div").animate({left: '250px'});
+}); //왼쪽에 250px만큼 공간을 두고 이동
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+    $("button").click(function(){
+        $("div").animate({left: '250px'});
+    });
+});
+</script> 
+</head>
+<body>
+
+<button>Start Animation</button>
+
+<p>By default, all HTML elements have a static position, and cannot be moved. To manipulate the position, remember to first set the CSS position property of the element to relative, fixed, or absolute!</p>
+
+<div style="background:#98bf21;height:100px;width:100px;position:absolute;"></div>
+
+</body>
+</html>
+```
+
+
+
+* ***animate()*** - **(Manipulate Multiple Properties)**
+
+
+
+tip.
+
+복합적
+
+
+
+Examples:
+
+```javascript
+$("button").click(function(){
+    $("div").animate({
+        left: '250px',
+        opacity: '0.5',
+        height: '150px',
+        width: '150px'
+    });
+}); 
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+    $("button").click(function(){
+        $("div").animate({
+            left: '250px',
+            opacity: '0.5',
+            height: '150px',
+            width: '150px'
+        });
+    });
+});
+</script> 
+</head>
+<body>
+
+<button>Start Animation</button>
+
+<p>By default, all HTML elements have a static position, and cannot be moved. To manipulate the position, remember to first set the CSS position property of the element to relative, fixed, or absolute!</p>
+
+<div style="background:#98bf21;height:100px;width:100px;position:absolute;"></div>
+
+</body>
+</html>
+```
+
+
+
+* ***animate()*** - (**Using Relative Values)**
+
+
+
+tip.
+
++= : 상대적 증가
+
+-= : 상대적 감소
+
+
+
+Examples:
+
+```javascript
+$("button").click(function(){
+    $("div").animate({
+        left: '250px',
+        height: '+=150px',
+        width: '+=150px'
+    });
+});
+/*
+relative
++=(상대적 증가) / -=(상대적 감소)
+*/
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+    $("button").click(function(){
+        $("div").animate({
+            left: '250px',
+            height: '+=150px',
+            width: '+=150px'
+        });
+    });
+});
+</script> 
+</head>
+<body>
+
+<button>Start Animation</button>
+
+<p>By default, all HTML elements have a static position, and cannot be moved. To manipulate the position, remember to first set the CSS position property of the element to relative, fixed, or absolute!</p>
+
+<div style="background:#98bf21;height:100px;width:100px;position:absolute;"></div>
+
+</body>
+</html>
+```
+
+
+
+* ***animate()*** - **(Using Pre-defined Values)**
+
+
+
+tip.
+
+toggle
+
+### 스위치!!
+
+
+
+Examples:
+
+```javascript
+$("button").click(function(){
+    $("div").animate({
+        height: 'toggle'
+    });
+}); 
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+    $("button").click(function(){
+        $("div").animate({
+            height: 'toggle'
+        });
+    });
+});
+</script> 
+</head>
+<body>
+
+<p>Click the button multiple times to toggle the animation.</p>
+
+<button>Start Animation</button>
+
+<p>By default, all HTML elements have a static position, and cannot be moved. To manipulate the position, remember to first set the CSS position property of the element to relative, fixed, or absolute!</p>
+
+<div style="background:#98bf21;height:100px;width:100px;position:absolute;"></div>
+
+</body>
+</html>
+```
+
+
+
+* ***animate()*** - **(Uses Queue Functionality)**
+
+
+
+tip.
+
+#### 순서!!(연속적 / 하나씩)
+
+
+
+Examples. 1
+
+```javascript
+$("button").click(function(){
+    var div = $("div");
+    div.animate({height: '300px', opacity: '0.4'}, "slow");
+    div.animate({width: '300px', opacity: '0.8'}, "slow");
+    div.animate({height: '100px', opacity: '0.4'}, "slow");
+    div.animate({width: '100px', opacity: '0.8'}, "slow");
+}); 
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+    $("button").click(function(){
+        var div = $("div");
+        div.animate({height: '300px', opacity: '0.4'}, "slow");
+        div.animate({width: '300px', opacity: '0.8'}, "slow");
+        div.animate({height: '100px', opacity: '0.4'}, "slow");
+        div.animate({width: '100px', opacity: '0.8'}, "slow");
+    });
+});
+</script> 
+</head>
+<body>
+
+<button>Start Animation</button>
+
+<p>By default, all HTML elements have a static position, and cannot be moved. To manipulate the position, remember to first set the CSS position property of the element to relative, fixed, or absolute!</p>
+
+<div style="background:#98bf21;height:100px;width:100px;position:absolute;"></div>
+
+</body>
+</html>
+
+```
+
+
+
+Examples. 2
+
+```javascript
+$("button").click(function(){
+    var div = $("div");
+    div.animate({left: '100px'}, "slow");
+    div.animate({fontSize: '3em'}, "slow");
+}); 
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+    $("button").click(function(){
+        var div = $("div");  
+        div.animate({left: '100px'}, "slow");
+        div.animate({fontSize: '3em'}, "slow");
+    });
+});
+</script> 
+</head>
+<body>
+
+<button>Start Animation</button>
+
+<p>By default, all HTML elements have a static position, and cannot be moved. To manipulate the position, remember to first set the CSS position property of the element to relative, fixed, or absolute!</p>
+
+<div style="background:#98bf21;height:100px;width:200px;position:absolute;">HELLO</div>
+
+</body>
+</html>
+```
+
+
+
+
+
+---
+
+---
+
+
+
+## 10강
+
+
+
+### jQuery Stop Animation
+
+
+
+* ***stop()***
+
+동작 중인 애니메이션을 멈춘다!!
+
+
+
+**Syntax:**
+
+```javascript
+$(selector).stop(stopAll,goToEnd);
+```
+
+
+
+tip. *전부 기본 값은 아니다!*(이해가 잘 안됨!!)
+
+**stopAll**: 전부 멈출지 / 현재 진행 중인 것만 멈출지
+
+(기본값으로는 현재 진행 중인 것만 멈춘다.)
+
+**goToEnd**: 멈추었을 때 처음부터 다시 시작할 것 인지
+
+
+
+기본 값이 아니라는 것이 비어있어도 된다는 의미?
+
+비어있어도 동작은 한다!!
+
+
+
+Examples:
+
+```javascript
+$("#stop").click(function(){
+    $("#panel").stop();
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+    $("#flip").click(function(){
+        $("#panel").slideDown(5000);
+    });
+    $("#stop").click(function(){
+        $("#panel").stop();
+    });
+});
+</script>
+ 
+<style> 
+#panel, #flip {
+    padding: 5px;
+    font-size: 18px;
+    text-align: center;
+    background-color: #555;
+    color: white;
+    border: solid 1px #666;
+    border-radius: 3px;
+}
+
+#panel {
+    padding: 50px;
+    display: none;
+}
+</style>
+</head>
+<body>
+ 
+<button id="stop">Stop sliding</button>
+
+<div id="flip">Click to slide down panel</div>
+<div id="panel">Hello world!</div>
+
+</body>
+</html>
+```
+
+
+
+
+
+---
+
+---
+
+
+
+## 11강
+
+
+
+### jQuery Callback Function
+
+
+
+***주고 있는 효과가 다 끝났을 때 실행되는 함수***
+
+***콜백 함수는 현재 효과가 끝난 후에 실행 됩니다.***
+
+
+
+일반적인 구문
+
+Typical syntax:
+
+```javascript
+ $(selector).hide(speed,callback);
+```
+
+
+
+tip.
+
+**speed**: 대기시간 ("slow", "fast", "1000", ...)
+
+**callback**: 콜백 함수
+
+ex) 10초 후(**speed**)에 hide기능(**callback**)을 실행한다!!
+
+
+
+**Example with Callback**
+
+```javascript
+$("button").click(function(){
+    $("p").hide("slow", function(){
+        alert("The paragraph is now hidden");
+    });
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("p").hide("slow", function(){
+            alert("The paragraph is now hidden");
+        });
+    });
+});
+</script>
+</head>
+<body>
+
+<button>Hide</button>
+
+<p>This is a paragraph with little content.</p>
+
+</body>
+</html>
+```
+
+
+
+**Example without Callback**
+
+```javascript
+$("button").click(function(){
+    $("p").hide(1000);
+    alert("The paragraph is now hidden");
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("p").hide(1000);
+        alert("The paragraph is now hidden");
+    });
+});
+</script>
+</head>
+<body>
+
+<button>Hide</button>
+
+<p>This is a paragraph with little content.</p>
+
+</body>
+</html>
+```
+
+
+
+
+
+---
+
+---
+
+
+
+## 12강
+
+
+
+### jQuery Chaining
+
+
+
+***동일한 요소에서 여러 jQuery명령을 차례로 실행***
+
+
+
+Example:
+
+```javascript
+$("#p1").css("color", "red").slideUp(2000).slideDown(2000);
+```
+
+*선택자 #p1에서 css기능 slideUp기능 slideDown기능을 순서대로 실행!!*
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#p1").css("color", "red").slideUp(2000).slideDown(2000);
+    });
+});
+</script>
+</head>
+<body>
+
+<p id="p1">jQuery is fun!!</p>
+
+<button>Click me</button>
+
+</body>
+</html>
+```
+
+
+
+Example:
+
+```javascript
+$("#p1").css("color", "red")
+  .slideUp(2000)
+  .slideDown(2000);
+```
+
+*jQuery는 관대한 언어라 이런 식으로 작성하여도 오류가 발생하지 않는다!!*
+
+
+
+
+
+---
+
+---
+
+
+
+## 13강
+
+
+
+### jQuery HTML!
+
+#### (Get Content and Attributes)
+
+
+
+---
+
+### ***jQuery DOM Manipulation***
+
+#### ***(DOM = Document Object Model)***
+
+#### ***(문서 객체 모델)***
+
+*문서들의 여러 부분들을 object로 모듈화 시켜 트리 형태로  나타내는 것을 DOM이라고 한다.*
+
+(브라우저에서 시각적으로 볼 때 그 많은 것들은 표준화 된 DOM이라는 것을 이용해서 쉽게 처리)
+
+jQuery는 이러한 DOM을 간단하게 다룰 수 있는 장점이 있다. (***내용 이해 필수!!***)
+
+---
+
+
+
+* ***text()*** - 선택한 요소의 텍스트 내용을 설정하거나 반환합니다.
+* ***html()*** - 선택한 요소의 내용을 설정하거나 반환합니다(HTML 마크 업 포함).
+* ***val()*** - 양식 필드의 값을 설정하거나 반환합니다.
+* ***attr()*** - href의 속성값을 가져오는 방법
+
+
+
+Example: text() / html()
+
+```javascript
+$("#btn1").click(function(){
+    alert("Text: " + $("#test").text());
+});
+$("#btn2").click(function(){
+    alert("HTML: " + $("#test").html());
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#btn1").click(function(){
+        alert("Text: " + $("#test").text());
+    });
+    $("#btn2").click(function(){
+        alert("HTML: " + $("#test").html());
+    });
+});
+</script>
+</head>
+<body>
+
+<p id="test">This is some <b>bold</b> text in a paragraph.</p>
+
+<button id="btn1">Show Text</button>
+<button id="btn2">Show HTML</button>
+
+</body>
+</html>
+```
+
+**text()** =>
+
+Text: This is some bold text in a paragraph.
+
+
+
+**html()** =>
+
+HTML: This is some <b>bold</b> text in a paragraph.
+
+
+
+
+
+Example: val()
+
+```javascript
+$("#btn1").click(function(){
+    alert("Value: " + $("#test").val());
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        alert("Value: " + $("#test").val());
+    });
+});
+</script>
+</head>
+<body>
+
+<p>Name: <input type="text" id="test" value="Mickey Mouse"></p>
+
+<button>Show Value</button>
+
+</body>
+</html>
+```
+
+**val()** =>
+
+Value: Mickey Mouse
+
+
+
+
+
+Example: attr()
+
+```javascript
+$("button").click(function(){
+    alert($("#w3s").attr("href"));
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        alert($("#w3s").attr("href"));
+    });
+});
+</script>
+</head>
+<body>
+
+<p><a href="https://www.w3schools.com" id="w3s">W3Schools.com</a></p>
+
+<button>Show href Value</button>
+
+</body>
+</html>
+```
+
+**attr()** =>
+
+https://www.w3schools.com
+
+
+
+
+
+---
+
+---
+
+
+
+## 14강
+
+
+
+### jQuery Add Elements
+
+
+
+* ***append()*** - 선택한 요소의 끝에 내용을 삽입합니다.
+* ***prepend()*** - 선택한 요소의 시작 부분에 내용을 삽입합니다.
+* ***after()*** - 선택한 요소 뒤에 내용을 삽입
+* ***before()*** - 선택한 요소 앞에 내용을 삽입
+
+
+
+Example: append()
+
+```javascript
+$("p").append("Some appended text.");
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#btn1").click(function(){
+        $("p").append(" <b>Appended text</b>.");
+    });
+
+    $("#btn2").click(function(){
+        $("ol").append("<li>Appended item</li>");
+    });
+});
+</script>
+</head>
+<body>
+
+<p>This is a paragraph.</p>
+<p>This is another paragraph.</p>
+
+<ol>
+  <li>List item 1</li>
+  <li>List item 2</li>
+  <li>List item 3</li>
+</ol>
+
+<button id="btn1">Append text</button>
+<button id="btn2">Append list items</button>
+
+</body>
+</html>
+```
+
+
+
+Example: prepend()
+
+```javascript
+$("p").prepend("Some prepended text.");
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#btn1").click(function(){
+        $("p").prepend("<b>Prepended text</b>. ");
+    });
+    $("#btn2").click(function(){
+        $("ol").prepend("<li>Prepended item</li>");
+    });
+});
+</script>
+</head>
+<body>
+
+<p>This is a paragraph.</p>
+<p>This is another paragraph.</p>
+
+<ol>
+  <li>List item 1</li>
+  <li>List item 2</li>
+  <li>List item 3</li>
+</ol>
+
+<button id="btn1">Prepend text</button>
+<button id="btn2">Prepend list item</button>
+
+</body>
+</html>
+```
+
+
+
+Example: 여러 가지 새로운 element 추가 방법 (**중요!!**)
+
+```javascript
+function appendText() {
+    var txt1 = "<p>Text.</p>";               // Create element with HTML  
+    var txt2 = $("<p></p>").text("Text.");   // Create with jQuery
+    var txt3 = document.createElement("p");  // Create with DOM
+    txt3.innerHTML = "Text.";
+    $("body").append(txt1, txt2, txt3);      // Append the new elements 
+}
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+function appendText() {
+    var txt1 = "<p>Text.</p>";              // Create text with HTML
+    var txt2 = $("<p></p>").text("Text.");  // Create text with jQuery
+    var txt3 = document.createElement("p");
+    txt3.innerHTML = "Text.";               // Create text with DOM
+    $("body").append(txt1, txt2, txt3);     // Append new elements
+}
+</script>
+</head>
+<body>
+
+<p>This is a paragraph.</p>
+<button onclick="appendText()">Append text</button>
+
+</body>
+</html>
+```
+
+*jQuery가 가장 간편?*
+
+
+
+Example: after() / before()
+
+```javascript
+$("img").after("Some text after");
+
+$("img").before("Some text before");
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#btn1").click(function(){
+        $("img").before("<b>Before</b>");
+    });
+
+    $("#btn2").click(function(){
+        $("img").after("<i>After</i>");
+    });
+});
+</script>
+</head>
+<body>
+
+<img src="/images/w3jquery.gif" alt="jQuery" width="100" height="140"><br><br>
+
+<button id="btn1">Insert before</button>
+<button id="btn2">Insert after</button>
+
+</body>
+</html>
+```
+
+
+
+Example: 여러가지 새로운 element 추가 방법(**중요!!**)
+
+```javascript
+function afterText() {
+    var txt1 = "<b>I </b>";                    // Create element with HTML  
+    var txt2 = $("<i></i>").text("love ");     // Create with jQuery
+    var txt3 = document.createElement("b");    // Create with DOM
+    txt3.innerHTML = "jQuery!";
+    $("img").after(txt1, txt2, txt3);          // Insert new elements after <img>
+}
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+function afterText() {
+    var txt1 = "<b>I </b>";                   // Create element with HTML
+    var txt2 = $("<i></i>").text("love ");    // Create with jQuery
+    var txt3 = document.createElement("b");   // Create with DOM
+    txt3.innerHTML = "jQuery!";
+    $("img").after(txt1, txt2, txt3);      // Insert new elements after img
+}
+</script>
+</head>
+<body>
+
+<img src="/images/w3jquery.gif" alt="jQuery" width="100" height="140">
+
+<p>Click the button to insert text after the image.</p>
+
+<button onclick="afterText()">Insert after</button>
+
+</body>
+</html>
+```
+
+tip.
+
+txt1 => 볼드체
+
+txt2 => 이텔릭체
+
+txt3 => 볼드체
+
+
+
+
+
+### jQuery Remove Elements
+
+
+
+* ***remove()*** - 선택된 요소 (및 그 자식 요소)를 제거합니다.
+* ***empty()*** - 선택한 요소에서 자식 요소를 제거합니다.
+
+
+
+tip.
+
+*둘의 차이는*
+
+*remove()는 전체를 제거*
+
+*empty()는 자식 요소(child element)만 제거*
+
+
+
+Example: remove()
+
+```javascript
+$("#div1").remove();
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#div1").remove();
+    });
+});
+</script>
+</head>
+<body>
+
+<div id="div1" style="height:100px;width:300px;border:1px solid black;background-color:yellow;">
+
+This is some text in the div.
+<p>This is a paragraph in the div.</p>
+<p>This is another paragraph in the div.</p>
+
+</div>
+<br>
+
+<button>Remove div element</button>
+
+</body>
+</html>
+```
+
+
+
+Example: empty()
+
+```javascript
+$("#div1").empty();
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#div1").empty();
+    });
+});
+</script>
+</head>
+<body>
+
+<div id="div1" style="height:100px;width:300px;border:1px solid black;background-color:yellow;">
+
+This is some text in the div.
+<p>This is a paragraph in the div.</p>
+<p>This is another paragraph in the div.</p>
+
+</div>
+<br>
+
+<button>Empty the div element</button>
+
+</body>
+</html>
+```
+
+
+
+Example: Filter the Elements to be Removed
+
+(제거할 요소 ***필터링***)
+
+예제. 1 : .test(test class)만 remove!!
+
+```javascript
+$("p").remove(".test");
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("p").remove(".test");
+    });
+});
+</script>
+<style>
+.test {
+    color: red;
+    font-size: 20px;
+}
+</style>
+</head>
+<body>
+
+<p>This is a paragraph.</p>
+<p class="test">This is another paragraph.</p>
+<p class="test">This is another paragraph.</p>
+
+<button>Remove all p elements with class="test"</button>
+
+</body>
+</html>
+```
+
+예제. 2 : .test / .demo (test class / demo class)만 remove!!
+
+```javascript
+$("p").remove(".test, .demo");
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("p").remove(".test, .demo");
+    });
+});
+</script>
+<style>
+.test {
+    color: red;
+    font-size: 20px;
+}
+
+.demo {
+    color: green;
+    font-size: 25px;
+}
+</style>
+</head>
+<body>
+
+<p>This is a paragraph.</p>
+<p class="test">This is p element with class="test".</p>
+<p class="test">This is p element with class="test".</p>
+<p class="demo">This is p element with class="demo".</p>
+
+<button>Remove all p elements with class="test" and class="demo"</button>
+
+</body>
+</html>
+```
+
+
+
+
+
+---
+
+---
+
+
+
+## 15강
+
+
+
+### jQuery - CSS!
+
+##### (Get and Set CSS Classes)
+
+
+
+#### jQuery Manipulating CSS
+
+
+
+* ***addClass()*** - 선택한 요소에 하나 이상의 클래스를 추가합니다.
+* ***removeClass()*** - 선택한 요소에서 하나 이상의 클래스를 제거합니다.
+* ***toggleClass()*** - 선택한 요소에서 클래스를 추가 / 제거 토글 (**스위치**)
+* ***css()*** - 스타일 속성을 설정하거나 반환합니다.
+
+
+
+Tip.
+
+```css
+.important {
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+.blue {
+    color: blue;
+}
+```
+
+*아래의 예제에서는 위의 CSS가 공통적으로 사용된다!!*
+
+
+
+Example: addClass()
+
+```javascript
+$("button").click(function(){
+    $("h1, h2, p").addClass("blue");
+    $("div").addClass("important");
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("h1, h2, p").addClass("blue");
+        $("div").addClass("important");
+    });
+});
+</script>
+<style>
+.important {
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+.blue {
+    color: blue;
+}
+</style>
+</head>
+<body>
+
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+
+<p>This is a paragraph.</p>
+<p>This is another paragraph.</p>
+
+<div>This is some important text!</div><br>
+
+<button>Add classes to elements</button>
+
+</body>
+</html>
+```
+
+*addClass()매서드 내에서 여러 클래스를 지정할 수 도 있다*
+
+```javascript
+$("button").click(function(){
+    $("#div1").addClass("important blue");
+});
+```
+
+*" " 내에서 띄어쓰기!!*
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#div1").addClass("important blue");
+    });
+});
+</script>
+<style>
+.important {
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+.blue {
+    color: blue;
+}
+</style>
+</head>
+<body>
+
+<div id="div1">This is some text.</div>
+<div id="div2">This is some text.</div>
+<br>
+
+<button>Add classes to first div element</button>
+
+</body>
+</html>
+```
+
+
+
+Example: removeClass()
+
+```javascript
+$("button").click(function(){
+    $("h1, h2, p").removeClass("blue");
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("h1, h2, p").removeClass("blue");
+    });
+});
+</script>
+<style>
+.important {
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+.blue {
+    color: blue;
+}
+</style>
+</head>
+<body>
+
+<h1 class="blue">Heading 1</h1>
+<h2 class="blue">Heading 2</h2>
+
+<p class="blue">This is a paragraph.</p>
+<p>This is another paragraph.</p>
+
+<button>Remove class from elements</button>
+
+</body>
+</html>
+```
+
+
+
+Example: toggleClass()
+
+```javascript
+$("button").click(function(){
+    $("h1, h2, p").toggleClass("blue");
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("h1, h2, p").toggleClass("blue");
+    });
+});
+</script>
+<style>
+.blue {
+    color: blue;
+}
+</style>
+</head>
+<body>
+
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+
+<p>This is a paragraph.</p>
+<p>This is another paragraph.</p>
+
+<button>Toggle class</button>
+
+</body>
+</html>
+```
+
+
+
+
+
+#### jQuery css() Method
+
+
+
+***CSS의 속성 반환***
+
+지정된 CSS속성의 값을 반환하려면 다음 구문을 사용
+
+```javascript
+css("propertyname");
+```
+
+
+
+Example:
+
+```javascript
+$("p").css("background-color");
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        alert("Background color = " + $("p").css("background-color"));
+    });
+});
+</script>
+</head>
+<body>
+
+<h2>This is a heading</h2>
+
+<p style="background-color:#ff0000">This is a paragraph.</p>
+<p style="background-color:#00ff00">This is a paragraph.</p>
+<p style="background-color:#0000ff">This is a paragraph.</p>
+
+<button>Return background-color of p</button>
+
+</body>
+</html>
+```
+
+*Background 컬러의 rgb 값을 보여준다.*
+
+=> Background color = rgb(255, 0, 0)
+
+
+
+***CSS의 속성 설정*** **중요!!**  
+
+지정된 CSS의 속성을 설정하려면 다음 구문을 사용
+
+```javascript
+css("propertyname","value");
+```
+
+**하나의 CSS의 속성을 사용하기 위해서는 *,(쉼표)*를 사용해야 한다.**
+
+
+
+Example:
+
+```javascript
+$("p").css("background-color", "yellow");
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("p").css("background-color", "yellow");
+    });
+});
+</script>
+</head>
+<body>
+
+<h2>This is a heading</h2>
+
+<p style="background-color:#ff0000">This is a paragraph.</p>
+<p style="background-color:#00ff00">This is a paragraph.</p>
+<p style="background-color:#0000ff">This is a paragraph.</p>
+
+<p>This is a paragraph.</p>
+
+<button>Set background-color of p</button>
+
+</body>
+</html>
+```
+
+
+
+***여러 CSS의 속성 설정*** **중요!!**
+
+여러 CSS의 속성을 사용하려면 다음 구문을 사용
+
+```javascript
+css({"propertyname":"value","propertyname":"value",...});
+```
+
+**여러 개의 CSS의 속성을 사용하기 위해서는 *:(콜론)*을 사용해야한다.**
+
+
+
+Example:
+
+```javascript
+$("p").css({"background-color": "yellow", "font-size": "200%"});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("p").css({"background-color": "yellow", "font-size": "200%"});
+    });
+});
+</script>
+</head>
+<body>
+
+<h2>This is a heading</h2>
+
+<p style="background-color:#ff0000">This is a paragraph.</p>
+<p style="background-color:#00ff00">This is a paragraph.</p>
+<p style="background-color:#0000ff">This is a paragraph.</p>
+
+<p>This is a paragraph.</p>
+
+<button>Set multiple styles for p</button>
+
+</body>
+</html>
+```
+
+
+
+***jQuery CSS Method 참고***
+
+| Method                                                       | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [addClass()](https://www.w3schools.com/jquery/html_addclass.asp) | Adds one or more class names to selected elements            |
+| [after()](https://www.w3schools.com/jquery/html_after.asp)   | Inserts content after selected elements                      |
+| [append()](https://www.w3schools.com/jquery/html_append.asp) | Inserts content at the end of selected elements              |
+| [appendTo()](https://www.w3schools.com/jquery/html_appendto.asp) | Inserts HTML elements at the end of selected elements        |
+| [attr()](https://www.w3schools.com/jquery/html_attr.asp)     | Sets or returns attributes/values of selected elements       |
+| [before()](https://www.w3schools.com/jquery/html_before.asp) | Inserts content before selected elements                     |
+| [clone()](https://www.w3schools.com/jquery/html_clone.asp)   | Makes a copy of selected elements                            |
+| [css()](https://www.w3schools.com/jquery/css_css.asp)        | Sets or returns one or more style properties for selected elements |
+| [detach()](https://www.w3schools.com/jquery/html_detach.asp) | Removes selected elements (keeps data and events)            |
+| [empty()](https://www.w3schools.com/jquery/html_empty.asp)   | Removes all child nodes and content from selected elements   |
+| [hasClass()](https://www.w3schools.com/jquery/html_hasclass.asp) | Checks if any of the selected elements have a specified class name |
+| [height()](https://www.w3schools.com/jquery/css_height.asp)  | Sets or returns the height of selected elements              |
+| [html()](https://www.w3schools.com/jquery/html_html.asp)     | Sets or returns the content of selected elements             |
+| [innerHeight()](https://www.w3schools.com/jquery/html_innerheight.asp) | Returns the height of an element (includes padding, but not border) |
+| [innerWidth()](https://www.w3schools.com/jquery/html_innerwidth.asp) | Returns the width of an element (includes padding, but not border) |
+| [insertAfter()](https://www.w3schools.com/jquery/html_insertafter.asp) | Inserts HTML elements after selected elements                |
+| [insertBefore()](https://www.w3schools.com/jquery/html_insertbefore.asp) | Inserts HTML elements before selected elements               |
+| [offset()](https://www.w3schools.com/jquery/css_offset.asp)  | Sets or returns the offset coordinates for selected elements (relative to the document) |
+| [offsetParent()](https://www.w3schools.com/jquery/css_offsetparent.asp) | Returns the first positioned parent element                  |
+| [outerHeight()](https://www.w3schools.com/jquery/html_outerheight.asp) | Returns the height of an element (includes padding and border) |
+| [outerWidth()](https://www.w3schools.com/jquery/html_outerwidth.asp) | Returns the width of an element (includes padding and border) |
+| [position()](https://www.w3schools.com/jquery/css_position.asp) | Returns the position (relative to the parent element) of an element |
+| [prepend()](https://www.w3schools.com/jquery/html_prepend.asp) | Inserts content at the beginning of selected elements        |
+| [prependTo()](https://www.w3schools.com/jquery/html_prependto.asp) | Inserts HTML elements at the beginning of selected elements  |
+| [prop()](https://www.w3schools.com/jquery/html_prop.asp)     | Sets or returns properties/values of selected elements       |
+| [remove()](https://www.w3schools.com/jquery/html_remove.asp) | Removes the selected elements (including data and events)    |
+| [removeAttr()](https://www.w3schools.com/jquery/html_removeattr.asp) | Removes one or more attributes from selected elements        |
+| [removeClass()](https://www.w3schools.com/jquery/html_removeclass.asp) | Removes one or more classes from selected elements           |
+| [removeProp()](https://www.w3schools.com/jquery/html_removeprop.asp) | Removes a property set by the prop() method                  |
+| [replaceAll()](https://www.w3schools.com/jquery/html_replaceall.asp) | Replaces selected elements with new HTML elements            |
+| [replaceWith()](https://www.w3schools.com/jquery/html_replacewith.asp) | Replaces selected elements with new content                  |
+| [scrollLeft()](https://www.w3schools.com/jquery/css_scrollleft.asp) | Sets or returns the horizontal scrollbar position of selected elements |
+| [scrollTop()](https://www.w3schools.com/jquery/css_scrolltop.asp) | Sets or returns the vertical scrollbar position of selected elements |
+| [text()](https://www.w3schools.com/jquery/html_text.asp)     | Sets or returns the text content of selected elements        |
+| [toggleClass()](https://www.w3schools.com/jquery/html_toggleclass.asp) | Toggles between adding/removing one or more classes from selected elements |
+| [unwrap()](https://www.w3schools.com/jquery/html_unwrap.asp) | Removes the parent element of the selected elements          |
+| [val()](https://www.w3schools.com/jquery/html_val.asp)       | Sets or returns the value attribute of the selected elements (for form elements) |
+| [width()](https://www.w3schools.com/jquery/css_width.asp)    | Sets or returns the width of selected elements               |
+| [wrap()](https://www.w3schools.com/jquery/html_wrap.asp)     | Wraps HTML element(s) around each selected element           |
+| [wrapAll()](https://www.w3schools.com/jquery/html_wrapall.asp) | Wraps HTML element(s) around all selected elements           |
+| [wrapInner()](https://www.w3schools.com/jquery/html_wrapinner.asp) | Wraps HTML element(s) around the content of each selected element |
+
+ 
+
+
+
+----
+
+---
+
+
+
+## 16강
+
+
+
+### jQuery Dimensions (면적)
+
+
+
+* ***width()*** - 너비(폭) (element만의)
+* ***height()*** - 높이 (element만의)
+* ***innerWidth()*** - 내부 폭 (element를 포함한 padding까지)
+* ***innerHeight()*** - 내부 높이 (element를 포함한 padding까지)
+* ***outerWidth()*** - 외부 폭 (element와 padding을 포함한 border까지)
+* ***outerHeight()*** - 외부 높이 (element와 padding을 포함한 border까지)
+* ***outerWidth(true)*** - 전체 폭 (margin 포함)
+* ***outerHeight(true)*** - 전체 높이 (margin 포함)
+
+
+
+![jQuery Dimensions](https://www.w3schools.com/jquery/img_jquerydim.gif)
+
+
+
+
+
+***jQuery의 width()와 height() Method***
+
+
+
+Example
+
+```javascript
+$("button").click(function(){
+    var txt = "";
+    txt += "Width: " + $("#div1").width() + "</br>";
+    txt += "Height: " + $("#div1").height();
+    $("#div1").html(txt);
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        var txt = "";
+        txt += "Width of div: " + $("#div1").width() + "</br>";
+        txt += "Height of div: " + $("#div1").height();
+        $("#div1").html(txt);
+    });
+});
+</script>
+<style>
+#div1 {
+    height: 100px;
+    width: 300px;
+    padding: 10px;
+    margin: 3px;
+    border: 1px solid blue;
+    background-color: lightblue;
+}
+</style>
+</head>
+<body>
+
+<div id="div1"></div>
+<br>
+
+<button>Display dimensions of div</button>
+
+<p>width() - returns the width of an element.</p>
+<p>height() - returns the height of an element.</p>
+
+</body>
+</html>
+```
+
+
+
+***jQuery의 innerWidth()와 innerHeight() Methods***
+
+
+
+Example
+
+```javascript
+$("button").click(function(){
+    var txt = "";
+    txt += "Inner width: " + $("#div1").innerWidth() + "</br>";
+    txt += "Inner height: " + $("#div1").innerHeight();
+    $("#div1").html(txt);
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        var txt = "";
+        txt += "Width of div: " + $("#div1").width() + "</br>";
+        txt += "Height of div: " + $("#div1").height() + "</br>";
+        txt += "Inner width of div: " + $("#div1").innerWidth() + "</br>";
+        txt += "Inner height of div: " + $("#div1").innerHeight();
+        $("#div1").html(txt);
+    });
+});
+</script>
+</head>
+<style>
+#div1 {
+    height: 100px;
+    width: 300px;
+    padding: 10px;
+    margin: 3px;
+    border: 1px solid blue;
+    background-color: lightblue;
+}
+</style>
+<body>
+
+<div id="div1"></div>
+<br>
+
+<button>Display dimensions of div</button>
+
+<p>innerWidth() - returns the width of an element (includes padding).</p>
+<p>innerHeight() - returns the height of an element (includes padding).</p>
+
+</body>
+</html>
+```
+
+
+
+***jQuery의 outerWidth()와 outerHeight() Methods***
+
+
+
+Example . 1
+
+```javascript
+$("button").click(function(){
+    var txt = "";
+    txt += "Outer width: " + $("#div1").outerWidth() + "</br>";
+    txt += "Outer height: " + $("#div1").outerHeight();
+    $("#div1").html(txt);
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        var txt = "";
+        txt += "Width of div: " + $("#div1").width() + "</br>";
+        txt += "Height of div: " + $("#div1").height() + "</br>";
+        txt += "Outer width of div: " + $("#div1").outerWidth() + "</br>";
+        txt += "Outer height of div: " + $("#div1").outerHeight();
+        $("#div1").html(txt);
+    });
+});
+</script>
+<style>
+#div1 {
+    height: 100px;
+    width: 300px;
+    padding: 10px;
+    margin: 3px;
+    border: 1px solid blue;
+    background-color: lightblue;
+}
+</style>
+</head>
+<body>
+
+<div id="div1"></div>
+<br>
+
+<button>Display dimensions of div</button>
+
+<p>outerWidth() - returns the width of an element (includes padding and border).</p>
+<p>outerHeight() - returns the height of an element (includes padding and border).</p>
+
+</body>
+</html>
+```
+
+
+
+Example . 2
+
+```javascript
+$("button").click(function(){
+    var txt = "";
+    txt += "Outer width (+margin): " + $("#div1").outerWidth(true) + "</br>";
+    txt += "Outer height (+margin): " + $("#div1").outerHeight(true);
+    $("#div1").html(txt);
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        var txt = "";
+        txt += "Width of div: " + $("#div1").width() + "</br>";
+        txt += "Height of div: " + $("#div1").height() + "</br>";
+        txt += "Outer width of div (margin included): " + $("#div1").outerWidth(true) + "</br>";
+        txt += "Outer height of div (margin included): " + $("#div1").outerHeight(true);
+        $("#div1").html(txt);
+    });
+});
+</script>
+<style>
+#div1 {
+    height: 100px;
+    width: 300px;
+    padding: 10px;
+    margin: 3px;
+    border: 1px solid blue;
+    background-color: lightblue;
+}
+</style>
+</head>
+<body>
+
+<div id="div1"></div>
+<br>
+
+<button>Display dimensions of div</button>
+
+<p>outerWidth(true) - returns the width of an element (includes padding, border, and margin).</p>
+<p>outerHeight(true) - returns the height of an element (includes padding, border, and margin).</p>
+
+</body>
+</html>
+```
+
+
+
+***jQuery More width() and height()***
+
+
+
+Example . 1
+
+```javascript
+$("button").click(function(){
+    var txt = "";
+    txt += "Document width/height: " + $(document).width();
+    txt += "x" + $(document).height() + "\n";
+    txt += "Window width/height: " + $(window).width();
+    txt += "x" + $(window).height();
+    alert(txt);
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        var txt = "";
+        txt += "Document width/height: " + $(document).width();
+        txt += "x" + $(document).height() + "\n";
+        txt += "Window width/height: " + $(window).width();
+        txt += "x" + $(window).height();
+        alert(txt);
+    });
+});
+</script>
+</head>
+<body>
+
+<button>Display dimensions of document and window</button>
+
+</body>
+</html>
+```
+
+
+
+Example . 2
+
+```javascript
+$("button").click(function(){
+    $("#div1").width(500).height(500);
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#div1").width(500).height(500);
+    });
+});
+</script>
+<style>
+#div1 {
+    height: 100px;
+    width: 300px;
+    padding: 10px;
+    margin: 3px;
+    border: 1px solid blue;
+    background-color: lightblue;
+}
+</style>
+</head>
+<body>
+
+<div id="div1"></div>
+<br>
+
+<button>Resize div</button>
+
+</body>
+</html>
+```
+
+
+
+
+
+---
+
+---
+
+
+
+## 17강
+
+
+
+### jQuery Traversing!
 
 
 
