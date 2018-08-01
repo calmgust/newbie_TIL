@@ -3297,7 +3297,1469 @@ $(document).ready(function(){
 
 
 
+**Traversing**
+
+*브라우저 상에서 지정된 DOM(Tree)내에서 자유자재로 이동이 가능*!
 
 
 
+traverse
+
+가로지르다 / 횡단하다 / 넘다 / 건너다
+
+
+
+![jQuery í¬ê¸°](https://www.w3schools.com/jquery/img_travtree.png)
+
+
+
+Illustration explained:
+
+* <div> element는 <ul>의 parent 이자 ancestor
+* <ul> element는 <li>의 parent이고 <div>의 child
+* left <li> element는 <span>의 parent이고 <ul>의 child이고 <div>의 descendant
+* <span> element는 left <li>의 child이고 <ul>과<div>의 descendant
+* 양쪽 <li>는 siblings(형제) (그들은 같은 부모를 공유한다.)
+* right <li> element는 <b>의 parent이고 <ul>의 child이고  <div>의 descendant
+* <b> element는 right <li>의 child이고 <ul>, <div>의 descendant
+
+
+
+
+
+#### Ancestors
+
+
+
+* ***parent()*** - 상위
+* ***parents()*** - 모든 상위
+* ***parentsUntil()*** - 
+
+
+
+
+
+***parent()***
+
+
+
+Example
+
+```javascript
+$(document).ready(function(){
+    $("span").parent();
+});
+```
+
+tip.
+
+*span이라는 element의 parent*
+
+
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.ancestors * { 
+    display: block;
+    border: 2px solid lightgrey;
+    color: lightgrey;
+    padding: 5px;
+    margin: 15px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("span").parent().css({"color": "red", "border": "2px solid red"});
+});
+
+//span이라는 element의 parent의 CSS를 수정!
+
+</script>
+</head>
+<body>
+
+<div class="ancestors">
+  <div style="width:500px;">div (great-grandparent)
+    <ul>ul (grandparent)  
+      <li>li (direct parent)
+        <span>span</span>
+      </li>
+    </ul>   
+  </div>
+
+  <div style="width:500px;">div (grandparent)   
+    <p>p (direct parent)
+        <span>span</span>
+      </p> 
+  </div>
+</div>
+
+</body>
+</html>
+```
+
+tip.
+
+*span이라는 element의 parent의 CSS를 수정!*
+
+
+
+
+
+***parents()***
+
+
+
+Example . 1
+
+```javascript
+$(document).ready(function(){
+    $("span").parents();
+});
+```
+
+tip.
+
+*span이라는 element의 모든 parents*
+
+
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.ancestors * { 
+    display: block;
+    border: 2px solid lightgrey;
+    color: lightgrey;
+    padding: 5px;
+    margin: 15px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("span").parents().css({"color": "red", "border": "2px solid red"});
+});
+
+//span이라는 element의 모든 parents들의 CSS
+
+</script>
+</head>
+
+<body class="ancestors">body (great-great-grandparent)
+  <div style="width:500px;">div (great-grandparent)
+    <ul>ul (grandparent)  
+      <li>li (direct parent)
+        <span>span</span>
+      </li>
+    </ul>   
+  </div>
+</body>
+
+<!-- The outer red border, before the body element, is the html element (also an ancestor) -->
+</html>
+```
+
+tip.
+
+*span이라는 element의 모든 parents들의 CSS를 수정*
+
+
+
+Example . 2 **특정 상위** 
+
+(괄호 속에 내용을 채워 넣을 수 있다!)
+
+```javascript
+$(document).ready(function(){
+    $("span").parents("ul");
+});
+```
+
+tip.
+
+상위 중에 특정한 부분만!
+
+
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.ancestors * { 
+    display: block;
+    border: 2px solid lightgrey;
+    color: lightgrey;
+    padding: 5px;
+    margin: 15px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("span").parents("ul").css({"color": "red", "border": "2px solid red"});
+});
+</script>
+</head>
+
+<body class="ancestors">body (great-great-grandparent)
+  <div style="width:500px;">div (great-grandparent)
+    <ul>ul (grandparent)  
+      <li>li (direct parent)
+        <span>span</span>
+      </li>
+    </ul>   
+  </div>
+</body>
+
+</html>
+```
+
+tip.
+
+*span의 parents 중 ul태그만!*
+
+
+
+
+
+***parentsUntil()***
+
+(괄호 속에 내용을 채워 넣을 수 있다!)
+
+
+
+Example
+
+```javascript
+$(document).ready(function(){
+    $("span").parentsUntil("div");
+});
+```
+
+tip.
+
+*span 상위 div까지!!*
+
+*상위까지 중간 태그도 포함*
+
+
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.ancestors * { 
+    display: block;
+    border: 2px solid lightgrey;
+    color: lightgrey;
+    padding: 5px;
+    margin: 15px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("span").parentsUntil("div").css({"color": "red", "border": "2px solid red"});
+});
+</script>
+</head>
+
+<body class="ancestors"> body (great-great-grandparent)
+  <div style="width:500px;">div (great-grandparent)
+    <ul>ul (grandparent)  
+      <li>li (direct parent)
+        <span>span</span>
+      </li>
+    </ul>   
+  </div>
+</body>
+```
+
+
+
+
+
+#### Descendants
+
+
+
+* ***children()*** - 하위
+* ***find()*** -
+
+
+
+
+
+***children()***
+
+
+
+Example . 1
+
+```javascript
+$(document).ready(function(){
+    $("div").children();
+});
+```
+
+tip.
+
+*div의 바로 아래 자식만!*
+
+
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.descendants * { 
+    display: block;
+    border: 2px solid lightgrey;
+    color: lightgrey;
+    padding: 5px;
+    margin: 15px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("div").children().css({"color": "red", "border": "2px solid red"});
+});
+</script>
+</head>
+<body>
+
+<div class="descendants" style="width:500px;">div (current element) 
+  <p>p (child)
+    <span>span (grandchild)</span>     
+  </p>
+  <p>p (child)
+    <span>span (grandchild)</span>
+  </p> 
+</div>
+
+</body>
+</html>
+```
+
+
+
+Example . 2 **특정 부분**
+
+```javascript
+$(document).ready(function(){
+    $("div").children("p.first");
+});
+```
+
+tip.
+
+*div 아래의 클래스가 first인 것만!*
+
+
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.descendants * { 
+    display: block;
+    border: 2px solid lightgrey;
+    color: lightgrey;
+    padding: 5px;
+    margin: 15px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("div").children("p.first").css({"color": "red", "border": "2px solid red"});
+});
+</script>
+</head>
+<body>
+
+<div class="descendants" style="width:500px;">div (current element) 
+  <p class="first">p (child)
+    <span>span (grandchild)</span>     
+  </p>
+  <p class="second">p (child)
+    <span>span (grandchild)</span>
+  </p> 
+</div>
+
+</body>
+</html>
+```
+
+
+
+
+
+***find()***
+
+
+
+Example . 1
+
+```javascript
+$(document).ready(function(){
+    $("div").find("span");
+});
+```
+
+tip.
+
+*div 아래에 span을 찾아라*
+
+
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.descendants * { 
+    display: block;
+    border: 2px solid lightgrey;
+    color: lightgrey;
+    padding: 5px;
+    margin: 15px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("div").find("span").css({"color": "red", "border": "2px solid red"});
+});
+</script>
+</head>
+<body>
+
+<div class="descendants" style="width:500px;">div (current element) 
+  <p>p (child)
+    <span>span (grandchild)</span>     
+  </p>
+  <p>p (child)
+    <span>span (grandchild)</span>
+  </p> 
+</div>
+
+</body>
+</html>
+```
+
+tip.
+
+*div 아래에 span을 찾아서 CSS효과를 넣어라*
+
+
+
+Example . 2
+
+```javascript
+$(document).ready(function(){
+    $("div").find("*");
+});
+```
+
+tip.
+
+***div 아래에 전체를 선택!!*** (전체)
+
+
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.descendants * { 
+    display: block;
+    border: 2px solid lightgrey;
+    color: lightgrey;
+    padding: 5px;
+    margin: 15px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("div").find("*").css({"color": "red", "border": "2px solid red"});
+});
+</script>
+</head>
+<body>
+
+<div class="descendants" style="width:500px;">div (current element) 
+  <p>p (child)
+    <span>span (grandchild)</span>     
+  </p>
+  <p>p (child)
+    <span>span (grandchild)</span>
+  </p> 
+</div>
+
+</body>
+</html>
+```
+
+
+
+
+
+#### Siblings
+
+
+
+* ***siblings()*** - 형제 요소를 반영
+
+  
+
+* ***next()*** - 선택한 요소의 다음 형제 요소
+
+* ***nextAll()*** - 선택한 요소의 다음 모든 형제 요소
+
+* ***nextUntil()*** - 주어진 두 인수 사이에 있는 모든 다음 형제 요소
+
+  
+
+* ***prev()*** - 선택한 요소의 이전 형제 요소
+
+* ***prevAll()*** - 선택한 요소의 이전 모든 형제 요소
+
+* ***prevUntil()*** - 주어진 두 인수 사이에 있는 모든 이전 형제 요소
+
+
+
+
+
+***siblings()***
+
+
+
+Example . 1
+
+```javascript
+$(document).ready(function(){
+    $("h2").siblings();
+});
+```
+
+tip.
+
+*본인을 제외한 다른 모든 형제 요소들*
+
+
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.siblings * { 
+    display: block;
+    border: 2px solid lightgrey;
+    color: lightgrey;
+    padding: 5px;
+    margin: 15px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("h2").siblings().css({"color": "red", "border": "2px solid red"});
+});
+</script>
+</head>
+<body class="siblings">
+
+<div>div (parent)
+  <p>p</p>
+  <span>span</span>
+  <h2>h2</h2>
+  <h3>h3</h3>
+  <p>p</p>
+</div>
+
+</body>
+</html>
+```
+
+tip.
+
+*본인을 제외한 다른 모든 형제 요소들*
+
+
+
+Example . 2
+
+```javascript
+$(document).ready(function(){
+    $("h2").siblings("p");
+});
+//h2의 형제 중 p
+```
+
+(h2의 형제 중 p)
+
+tip.
+
+*특정 형제 요소*
+
+
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.siblings * { 
+    display: block;
+    border: 2px solid lightgrey;
+    color: lightgrey;
+    padding: 5px;
+    margin: 15px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("h2").siblings("p").css({"color": "red", "border": "2px solid red"});
+});
+</script>
+</head>
+<body class="siblings">
+
+<div>div (parent)
+  <p>p</p>
+  <span>span</span>
+  <h2>h2</h2>
+  <h3>h3</h3>
+  <p>p</p>
+</div>
+
+</body>
+</html>
+```
+
+
+
+
+
+***next()***
+
+
+
+Example
+
+```javascript
+$(document).ready(function(){
+    $("h2").next();
+});
+```
+
+tip.
+
+선택한 h2 요소의 다음 형제 요소
+
+
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.siblings * { 
+    display: block;
+    border: 2px solid lightgrey;
+    color: lightgrey;
+    padding: 5px;
+    margin: 15px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("h2").next().css({"color": "red", "border": "2px solid red"});
+});
+</script>
+</head>
+<body class="siblings">
+
+<div>div (parent)
+  <p>p</p>
+  <span>span</span>
+  <h2>h2</h2>
+  <h3>h3</h3>
+  <p>p</p>
+</div>
+
+</body>
+</html>
+```
+
+
+
+
+
+***nextAll()***
+
+
+
+Example
+
+```javascript
+$(document).ready(function(){
+    $("h2").nextAll();
+});
+```
+
+
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.siblings * { 
+    display: block;
+    border: 2px solid lightgrey;
+    color: lightgrey;
+    padding: 5px;
+    margin: 15px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("h2").nextAll().css({"color": "red", "border": "2px solid red"});
+});
+</script>
+</head>
+<body class="siblings">
+
+<div>div (parent)
+  <p>p</p>
+  <span>span</span>
+  <h2>h2</h2>
+  <h3>h3</h3>
+  <p>p</p>
+</div>
+
+</body>
+</html>
+```
+
+
+
+
+
+***nextUntil()***
+
+
+
+Example
+
+```javascript
+$(document).ready(function(){
+    $("h2").nextUntil("h6");
+});
+```
+
+tip.
+
+***h2부터 h6까지***
+
+
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.siblings * { 
+    display: block;
+    border: 2px solid lightgrey;
+    color: lightgrey;
+    padding: 5px;
+    margin: 15px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("h2").nextUntil("h6").css({"color": "red", "border": "2px solid red"});
+});
+</script>
+</head>
+<body class="siblings">
+
+<div>div (parent)
+  <p>p</p>
+  <span>span</span>
+  <h2>h2</h2>
+  <h3>h3</h3>
+  <h4>h4</h4>
+  <h5>h5</h5>
+  <h6>h6</h6>
+  <p>p</p>
+</div>
+
+</body>
+</html>
+```
+
+
+
+
+
+#### Filtering
+
+
+
+* ***first()*** - 지정된 요소의 첫 번째 요소를 반환
+
+* ***last()*** - 지정된 요소의 마지막 요소를 반환
+
+  
+
+* ***eq()*** - 선택된 요소의 특정 인덱스 번호가 있는 요소를 반환
+
+  
+
+* ***filter()*** - 기준과 일치하지 않는 요소는 선택 항목에서 제거되고 일치하는 요소는 반환
+
+* ***not()*** - 조건과 일치하지 않는 모든 요소를 반환
+
+
+
+**not()은 filter()의 반대!!**
+
+
+
+
+
+***first()***
+
+
+
+Example
+
+```javascript
+$(document).ready(function(){
+    $("div").first();
+});
+```
+
+tip.
+
+*div의 첫 번째 요소를 반환*
+
+
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("div").first().css("background-color", "yellow");
+});
+</script>
+</head>
+<body>
+
+<h1>Welcome to My Homepage</h1>
+
+<p>This is a paragraph.</p>
+
+<div style="border: 1px solid black;">
+  <p>A paragraph in a div.</p>
+  <p>Another paragraph in a div.</p>
+</div>
+<br>
+
+<div style="border: 1px solid black;">
+  <p>A paragraph in another div.</p>
+  <p>Another paragraph in another div.</p>
+</div>
+<br>
+
+<div style="border: 1px solid black;">
+  <p>A paragraph in another div.</p>
+  <p>Another paragraph in another div.</p>
+</div>
+
+</body>
+</html>
+```
+
+
+
+
+
+***last()***
+
+
+
+Example
+
+```javascript
+$(document).ready(function(){
+    $("div").last();
+});
+```
+
+tip.
+
+*div의 마지막 요소를 반환*
+
+
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("div").last().css("background-color", "yellow");
+});
+</script>
+</head>
+<body>
+
+<h1>Welcome to My Homepage</h1>
+
+<p>This is a paragraph.</p>
+
+<div style="border: 1px solid black;">
+  <p>A paragraph in a div.</p>
+  <p>Another paragraph in a div.</p>
+</div>
+<br>
+
+<div style="border: 1px solid black;">
+  <p>A paragraph in another div.</p>
+  <p>Another paragraph in another div.</p>
+</div>
+<br>
+
+<div style="border: 1px solid black;">
+  <p>A paragraph in another div.</p>
+  <p>Another paragraph in another div.</p>
+</div>
+
+</body>
+</html>
+```
+
+
+
+
+
+***eq()*** **- 인덱스!!**
+
+
+
+Example
+
+```javascript
+$(document).ready(function(){
+    $("p").eq(1);
+});
+```
+
+tip.
+
+*p태그에서 인덱스 값이 1인 것*
+
+
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("p").eq(1).css("background-color", "yellow");
+});
+</script>
+</head>
+<body>
+
+<h1>Welcome to My Homepage</h1>
+
+<p>My name is Donald (index 0).</p>
+<p>Donald Duck (index 1).</p>
+<p>I live in Duckburg (index 2).</p>
+<p>My best friend is Mickey (index 3).</p>
+
+</body>
+</html>
+```
+
+
+
+
+
+***filter()*** **- 일치하는 요소**
+
+
+
+Example
+
+```javascript
+$(document).ready(function(){
+    $("p").filter(".intro");
+});
+```
+
+
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("p").filter(".intro").css("background-color", "yellow");
+});
+</script>
+</head>
+<body>
+
+<h1>Welcome to My Homepage</h1>
+
+<p>My name is Donald.</p>
+<p class="intro">I live in Duckburg.</p>
+<p class="intro">I love Duckburg.</p>
+<p>My best friend is Mickey.</p>
+
+</body>
+</html>
+```
+
+
+
+
+
+***not()*** **- 일치하지 않는 요소**
+
+
+
+Example
+
+```javascript
+$(document).ready(function(){
+    $("p").not(".intro");
+});
+```
+
+
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("p").not(".intro").css("background-color", "yellow");
+});
+</script>
+</head>
+<body>
+
+<h1>Welcome to My Homepage</h1>
+
+<p>My name is Donald.</p>
+<p class="intro">I live in Duckburg.</p>
+<p class="intro">I love Duckburg.</p>
+<p>My best friend is Mickey.</p>
+
+</body>
+</html>
+```
+
+
+
+
+
+---
+
+---
+
+
+
+## 18강
+
+
+
+### AJAX
+
+
+
+**AJAX = Asynchronous JavaScript and XML**
+
+Asynchronous => 비동기화
+
+
+
+***특정 영역에 지정된(필요한) 부분만 불러오는 것이 AJAX***
+
+
+
+
+
+#### jQuery 
+
+#### - AJAX load() Method
+
+##### (서버와 통신을 한다!)
+
+
+
+**Syntax**:
+
+```javascript
+$(selector).load(URL,data,callback);
+```
+
+*서버에서 클라이언트에게 내용을 불러준다.*
+
+
+
+**demo_test.txt** (ex 서버에 있는 문서)
+
+```javascript
+<h2>jQuery and AJAX is FUN!!!</h2>
+<p id="p1">This is some text in a paragraph.</p>
+```
+
+
+
+Example . 1
+
+```javascript
+$("#div1").load("demo_test.txt");
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#div1").load("demo_test.txt");
+    });
+});
+</script>
+</head>
+<body>
+
+<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+
+<button>Get External Content</button>
+
+</body>
+</html>
+```
+
+
+
+Example . 2 **(특정 내용만 불러오기)**
+
+```javascript
+$("#div1").load("demo_test.txt #p1");
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#div1").load("demo_test.txt #p1");
+    });
+});
+</script>
+</head>
+<body>
+
+<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+
+<button>Get External Content</button>
+
+</body>
+</html>
+```
+
+
+
+선택적 callback 매개변수
+
+* responseTxt - 호출이 성공하면 결과 컨텐트를 포함합니다.
+* statusTxt - 호출 상태를 포함합니다.
+* xhr - XMLHttpRequest 객체를 포함합니다.
+
+
+
+Example
+
+```javascript
+$("button").click(function(){
+    $("#div1").load("demo_test.txt", function(responseTxt, statusTxt, xhr){
+        if(statusTxt == "success")
+            alert("External content loaded successfully!");
+        if(statusTxt == "error")
+            alert("Error: " + xhr.status + ": " + xhr.statusText);
+    });
+});
+```
+
+
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#div1").load("demo_test.txt", function(responseTxt, statusTxt, xhr){
+            if(statusTxt == "success")
+                alert("External content loaded successfully!");
+            if(statusTxt == "error")
+                alert("Error: " + xhr.status + ": " + xhr.statusText);
+        });
+    });
+});
+</script>
+</head>
+<body>
+
+<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+
+<button>Get External Content</button>
+
+</body>
+</html>
+```
+
+
+
+
+
+#### jQuery AJAX Method
+
+
+
+| Method                                                       | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [$.ajax()](https://www.w3schools.com/jquery/ajax_ajax.asp)   | Performs an async AJAX request                               |
+| $.ajaxPrefilter()                                            | Handle custom Ajax options or modify existing options before each request is sent and before they are processed by $.ajax() |
+| [$.ajaxSetup()](https://www.w3schools.com/jquery/ajax_ajaxsetup.asp) | Sets the default values for future AJAX requests             |
+| $.ajaxTransport()                                            | Creates an object that handles the actual transmission of Ajax data |
+| [$.get()](https://www.w3schools.com/jquery/ajax_get.asp)     | Loads data from a server using an AJAX HTTP GET request      |
+| [$.getJSON()](https://www.w3schools.com/jquery/ajax_getjson.asp) | Loads JSON-encoded data from a server using a HTTP GET request |
+| $.parseJSON()                                                | Deprecated in version 3.0, use [JSON.parse()](https://www.w3schools.com/js/js_json_parse.asp) instead. Takes a well-formed JSON string and returns the resulting JavaScript value |
+| [$.getScript()](https://www.w3schools.com/jquery/ajax_getscript.asp) | Loads (and executes) a JavaScript from a server using an AJAX HTTP GET request |
+| [$.param()](https://www.w3schools.com/jquery/ajax_param.asp) | Creates a serialized representation of an array or object (can be used as URL query string for AJAX requests) |
+| [$.post()](https://www.w3schools.com/jquery/ajax_post.asp)   | Loads data from a server using an AJAX HTTP POST request     |
+| [ajaxComplete()](https://www.w3schools.com/jquery/ajax_ajaxcomplete.asp) | Specifies a function to run when the AJAX request completes  |
+| [ajaxError()](https://www.w3schools.com/jquery/ajax_ajaxerror.asp) | Specifies a function to run when the AJAX request completes with an error |
+| [ajaxSend()](https://www.w3schools.com/jquery/ajax_ajaxsend.asp) | Specifies a function to run before the AJAX request is sent  |
+| [ajaxStart()](https://www.w3schools.com/jquery/ajax_ajaxstart.asp) | Specifies a function to run when the first AJAX request begins |
+| [ajaxStop()](https://www.w3schools.com/jquery/ajax_ajaxstop.asp) | Specifies a function to run when all AJAX requests have completed |
+| [ajaxSuccess()](https://www.w3schools.com/jquery/ajax_ajaxsuccess.asp) | Specifies a function to run when an AJAX request completes successfully |
+| [load()](https://www.w3schools.com/jquery/ajax_load.asp)     | Loads data from a server and puts the returned data into the selected element |
+| [serialize()](https://www.w3schools.com/jquery/ajax_serialize.asp) | Encodes a set of form elements as a string for submission    |
+| [serializeArray()](https://www.w3schools.com/jquery/ajax_serializearray.asp) | Encodes a set of form elements as an array of names and values |
+
+
+
+
+
+#### jQuery
+
+#### - AJAX get() and post() Method
+
+
+
+##### HTTP Request: GET vs. POST
+
+
+
+* **GET** - Requests data from a specified resource
+
+  (지정된 리소스에서 데이터를 요청합니다.)
+
+  Ex) 검색엔진에서 검색하고 검색 결과를 받는 것
+
+  
+
+* **POST** - Submits data to be processed to a specified resource
+
+  (처리할 데이터를 자원에 제출합니다.)
+
+  Ex) 비밀번호 입력하거나 회원가입할 때 입력하는 것
+
+
+
+
+
+***jQuery $.get() Method***
+
+
+
+**Syntax:**
+
+```javascript
+$.get(URL,callback);
+```
+
+Example
+
+```javascript
+$("button").click(function(){
+    $.get("demo_test.asp", function(data, status){
+        alert("Data: " + data + "\nStatus: " + status);
+    });
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $.get("demo_test.asp", function(data, status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    });
+});
+</script>
+</head>
+<body>
+
+<button>Send an HTTP GET request to a page and get the result back</button>
+
+</body>
+</html>
+```
+
+
+
+
+
+***jQuery $.post() Method***
+
+
+
+**Syntax:**
+
+```javascript
+$.post(URL,data,callback);
+```
+
+Example
+
+```javascript
+$("button").click(function(){
+    $.post("demo_test_post.asp",
+    {
+        name: "Donald Duck",
+        city: "Duckburg"
+    },
+    function(data, status){
+        alert("Data: " + data + "\nStatus: " + status);
+    });
+});
+```
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $.post("demo_test_post.asp",
+        {
+          name: "Donald Duck",
+          city: "Duckburg"
+        },
+        function(data,status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    });
+});
+</script>
+</head>
+<body>
+
+<button>Send an HTTP POST request to a page and get the result back</button>
+
+</body>
+</html>
+```
+
+
+
+
+
+---
+
+---
+
+
+
+## 19강
+
+
+
+### jQuery Misc!
+
+
+
+#### jQuery - The noConflict() Method
+
+
+
+
+
+YOUTUBE에서 jQuery 튜토리얼
+
+https://www.youtube.com/watch?v=2PDC3lLi2FE&index=2&list=PLsGh7Wc318kgN8_X1f833ah9IfC8KbNs7
+
+
+
+w3schools.com
+
+https://www.w3schools.com/jquery/jquery_noconflict.asp
 
