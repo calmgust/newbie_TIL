@@ -62,11 +62,14 @@ var pattern = new RegExp('a');
 
 3. 찾아낸 정보를 다른 정보로 치환하는 것
 
+
 ---
 
 
 
 ## 정규표현식 메소드 실행
+
+
 
 정규표현시을 컴파일해서 객체를 만들었다면
 
@@ -116,6 +119,8 @@ console.log(pattern.exec('bcdefg')); // false
 
 ## 문자열 메소드 실행
 
+
+
 문자열 객체의 몇몇 메소드는 정규표현식을 사용 가능
 
 
@@ -152,3 +157,154 @@ var pattern = /a/;
 console.log('abcdef'.replace(pattern, 'A')) // Abcdef
 ```
 
+
+
+
+
+---
+
+
+
+## 옵션 (option)
+
+
+
+### i
+
+i를 붙이면 대소문자를 구분하지 않는다.
+
+```javascript
+var xi = /a/;
+
+console.log("Abcde".match(xi)); // null
+
+var oi = /a/i;
+console.log("Abcde".match(oi)); // ["A"];
+```
+
+
+
+### g
+
+g를 붙이면 검색된 모든 결과를 리턴한다.
+
+```javascript
+var xg = /a/;
+
+console.log("abcdea".match(xg)); // ["a"]
+
+var og = /a/g;
+
+console.log("abcdea".match(og)); // ["a", "a"]
+```
+
+
+
+참고) ***옵션 i와 g를 동시에 사용 가능***
+
+```javascript
+var ig = /a/ig;
+
+console.log("AabcdAa".match(ig)); // ["A", "a", "A", "a"]
+```
+
+
+
+
+
+---
+
+
+
+## 캡쳐 (capture)
+
+
+
+괄호안의 패턴은 마치 변수처럼 재사용할 수 있다. 이때 기호 $를 사용하는데 아래 코드는 coding과 everybody의 순서를 역전시킨다.
+
+```javascript
+var pattern = /(\w+)\s(\w+)/;
+
+var str = "coding everybody";
+
+var result = str.replace(pattern, '$2, $1');
+
+console.log(result); // "everybody coding"
+
+//-----
+// cf)
+
+var result = str.replace(pattern, '($2) ($1)');
+
+console.log(result); // "(everybody) (coding)"
+```
+
+
+
+참고)
+
+<img width="706" alt="2018-09-30 22 13 44" src="https://user-images.githubusercontent.com/40155174/46257975-223d9a80-c4fe-11e8-8e73-92745d804430.png">
+
+**()** => **괄호**는 그룹(group)을 의미
+
+**\w** => 문자(string)를 의미 *(A~Z, a~z, 0~9)*
+
+**+** => 수량자
+
+**\w+** => 문자(string)가 하나 이상 (문자가 하나인 경우에도 속함)
+
+**\s** => 공백
+
+
+
+참고자료)
+
+* 정규표현식 시각화(https://regexper.com/)
+* 정규표현식 빌더(https://regexr.com/)
+
+
+
+
+
+---
+
+
+
+## 치환
+
+
+
+아래 코드는 본문 중의 URL을 링크 html 태그로 교체한다.
+
+**=> url에 해당하는 부분만 찾아서 링크로 고쳐준다.**
+
+
+
+```javascript
+var urlPattern = /\b(?:https?):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*/gim;
+var content = '생활코딩 : http://opentutorials.org/course/1 입니다. 네이버 : http://naver.com 입니다. ';
+var result = content.replace(urlPattern, function(url){
+    return '<a href="'+url+'">'+url+'</a>';
+});
+console.log(result);
+```
+
+
+
+결과
+
+```javascript
+생활코딩 : <a href="http://opentutorials.org/course/1">http://opentutorials.org/course/1</a> 입니다. 네이버 : <a href="http://naver.com">http://naver.com</a> 입니다.
+```
+
+
+
+
+
+---
+
+
+
+**정규표현식 심화**
+
+https://opentutorials.org/course/909/5142
