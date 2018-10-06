@@ -912,3 +912,88 @@ func();
 
 
 
+
+
+#### apply의 소개
+
+
+
+```javascript
+function sum(arg1, arg2){
+    return arg1 + arg2;
+}
+
+console.log(sum(1, 2)); // 3
+console.log(sum.apply(null, [1, 2])); // 3
+```
+
+
+
+*apply는 인자로 **배열** 사용*
+
+`sum.apply(null, [arg1, arg2])` <=> `sum.call(null, arg1, arg2)`
+
+
+
+
+
+#### apply의 사용
+
+
+
+```javascript
+o1 = {val1:1, val2:2, val3:3}
+o2 = {v1:10, v2:50, v3:100, v4:25}
+function sum(){
+    // var this = o1 or o2;
+    var _sum = 0;
+    for(name in this){
+        _sum += this[name]; // this는 현재 정의되어 있지 않다. (호출할 때 정의 된다.)
+    }
+    return _sum;
+}
+
+
+// this가 정의 된다.
+alert(sum.apply(o1)) // 6
+alert(sum.apply(o2)) // 185
+
+
+// o1을 인자로 주게 되면 sum이라는 함수의 this가 된다. => var this = o1 or o2;
+```
+
+`sum.apply(o1) === o1.sum(메소드)`
+
+
+
+```javascript
+function sum(){
+    var _sum = 0;
+    for(name in this){
+        if(typeof this[name] !== 'function'){
+			_sum += this[name];   
+        }
+    }
+    return _sum;
+}
+
+o1 = {val1:1, val2:2, val3:3, sum:sum}
+o2 = {v1:10, v2:50, v3:100, v4:25, sum:sum}
+alert(o1.sum());
+alert(o2.sum());
+
+// alert(sum.apply(o1)) // 6
+// alert(sum.apply(o2)) // 185
+```
+
+
+
+* ***객체 안에 데이터와는 상관없는 함수를 추가***해야되는 불편함 
+
+* ***if문(타입이 function이 아닌 것만)을 사용***해야 되는 번거로움
+
+위의 단점을 보완하기 위해서
+
+***apply를 사용***하게 되면 호출되는 시점에서 함수의 this 값을  변경하여
+
+마치 ***함수가 o1이라는 객체의 속성인 것처럼 실행***되게 할 수 있다.
