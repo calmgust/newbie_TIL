@@ -363,7 +363,7 @@ this는 ***함수(function)내에서 함수 호출 맥락(context)***을 의미 
 ```javascript
 function func(){
     if(window === this){
-        document.write("window === this");
+        document.write("window === this"); // console.log("window === this");
     }
 }
 
@@ -372,7 +372,7 @@ func();
 // window === this
 ```
 
-***=> 함수를 호출했을 때 this는 전역객체인 window와 같다.***
+***=> 함수를 호출(function invocation)했을 때 this는 전역객체인 window와 같다.***
 
 
 
@@ -409,7 +409,24 @@ o.func();
 아래 코드는 함수를 호출했을 때와 new를 이용해서 생성자를 호출했을 때의 차이를 보여준다.
 
 ```javascript
+var funcThis = null; // global
 
+function Func(){
+    funcThis = this; // 변수선언이 없기 때문에 o1은 전역을 참조
+}
+var o1 = Func(); // function invocation => this는 window
+if(funcThis === window){
+    document.write('window </br>');
+    // console.log('funcThis === window');
+}
+
+//-----
+
+var o2 = new Func(); // new invocation => this는 새로 생성된 객체
+if(funcThis === o2){
+    document.write('o2 </br>');
+    // console.log('funcThis === o2');
+}
 ```
 
 생성자는 빈 객체를 만든다. 그리고 이 객체내에서 this는 만들어진 객체를 가르킨다. 이것은 매우 중요한 사실이다. 생성자가 실행되기 전까지는 객체는 변수에도 할당될 수 없기 때문에 this가 아니면 객체에 대한 어떠한 작업을 할 수 없기 때문이다. 
@@ -420,13 +437,67 @@ o.func();
 
 ### <u>apply / call</u>
 
+
+
+#### 객체로서 함수 (함수도 객체다)
+
+참고) ***함수 리터럴(function literal)***
+
+```javascript
+function sum(x, y){return x + y;}; // 함수 리터럴
+// sum이라는 함수 객체
+
+sum(1, 2) // 3
+
+//-----
+
+var sum2 = new Function('x', 'y', 'return x + y;');
+
+sum2(1, 2) // 3
+
+// 이렇게 작성하는 것이 불편하기 때문에 함수 리터럴을 이용하여 작성!!
+```
+
+
+
+- ***함수 리터럴(function literal)***
+
+  `function sum(x, y){return x + y;};`
+
+
+
+- ***객체 리터럴(object literal)***
+
+  `var obj = {}`;
+
+
+
+- ***배열 리터럴(array literal)***
+
+  `var arr = [];`
+
+
+
+#### 리터럴(literal)
+
+*편리하게 어떤 값을 만들 수 있도록 해주는 문법적인 체계*
+
+
+
+
+
+### apply와 this
+
+
+
 함수의 메소드인 apply, call을 이용하면 this의 값을 제어할 수 있다. 
 
 ```javascript
 var o = {}
 var p = {}
+
 function func(){
-    switch(this){
+    switch(this){ // function invocation => this는 window
         case o:
             document.write('o<br />');
             break;
@@ -438,12 +509,142 @@ function func(){
             break;          
     }
 }
+
 func(); // window
-func.apply(o); // o
-func.apply(p); // p
+func.apply(o); // o (apply는 첫 번째 인자로 지정한 o가 this가 된다.)
+func.apply(p); // p (apply는 첫 번째 인자로 지정한 p가 this가 된다.)
 ```
 
+***=> 함수를 어떻게 호출하느냐에 따라 결과가 달라진다(JavaScript는 유연하다.)***
 
+
+
+
+
+참고) ***switch_case***
+
+```javascript
+switch(조건){
+        
+    case a:
+        console.log(1);
+        break;
+        
+    case b:
+        console.log(2);
+        break;
+        
+    case c:
+        console.log(3);
+        break;
+
+}
+```
+
+***=> switch의 괄호 안의 조건과 부합하는 case가 실행된다. case가 실행되고 break를 만나면 switch문은 종료한다.***
+
+
+
+* if문 과 switch문 대체제 관계
+
+* for문과 while문 대체제 관계
+
+
+
+
+
+----
+
+
+
+## 5. 상속 (inheritance)
+
+
+
+### 상속이란?
+
+
+
+**객체**는 연관된 로직들로 이루어진 작은 프로그램
+
+**상속**은 <u>객체의 로직을 그대로 물려 받는 또 다른 객체를 만들 수 있는 기능</u>을 의미
+
+***단순히 물려받는 것이 아니라 기존의 로직을 수정하고 변경해서 파생된 새로운 객체를 만들 수 있게 해준다.***
+
+
+
+```javascript
+function Person(name){
+    this.name = name;
+    this.introduce = function(){
+        return 'My name is '+this.name; 
+    }   
+}
+var p1 = new Person('egoing');
+document.write(p1.introduce()+"<br />");
+// My name is egoing
+
+
+//-----
+
+
+function Person(name){
+    this.name = name;
+}
+Person.prototype.name=null;
+Person.prototype.introduce = function(){
+    return 'My name is '+this.name; 
+}
+var p1 = new Person('egoing');
+document.write(p1.introduce()+"<br />");
+// My name is egoing
+```
+
+결과는 같지만 상속을 위한 기본적인 준비
+
+
+
+
+
+### 상속의 사용방법
+
+
+
+```javascript
+function Person(name){
+    this.name = name;
+}
+Person.prototype.name = null;
+Person.prototype.introduce = function(){
+    return "My name is " + this.name;
+}
+
+
+function Programmer(name){
+    this.name = name;
+}
+Programmers.prototype = new Person(); // 상속?
+
+
+var p1 = new Programmer('egoing');
+document.write(p1.introduce() + "</br>");
+```
+
+Programmer라는 생성자를 만들고
+
+**이 생성자의 prototype과 Person의 객체를 연결**
+
+Programmer 객체도 메소드 introduce를 사용 가능
+
+***=> Programmer가 Person의 기능을 상속***
+
+부모의 기능을 계속 발전할 수 있는 것이 상속
+
+
+
+
+
+### 기능의 추가
 
 
 
