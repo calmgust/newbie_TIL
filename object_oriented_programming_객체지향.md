@@ -1018,7 +1018,7 @@ var grades = {egoing: 10, k8805: 6, sorialgi: 80}
 
 
 
-### Object API 사용법
+### Object API 사용법*
 
 
 
@@ -1089,15 +1089,152 @@ console.log('a.toString()', a.toString());
 
 
 
+Object 객체를 확장하면 모든 객체가 접근할 수 있는 API를 만들 수 있다.
+
+
+
+```javascript
+Object.prototype.contain = function(needle){ // 객체나 배열 안에 찾고자 하는 것이 있는 경우 true / 없는 경우 false
+    
+    for(var name in this){ // this(메소드 안에 this) => 메소드가 소속되어 있는 객체를 의(부모 object) 
+        if(this[name] === needle){
+            return true;
+        }
+    }
+    return false;
+}
+
+
+var o = {name: 'egoing', city: 'seoul'};
+console.log(o.contain('egoing'));
+
+var a = ['egoing', 'leezche', 'grapittie'];
+console.log(a.contain('leezche'));
+```
 
 
 
 
 
+### Object 확장의 *<u>위험</u>*
 
-### Object 확장의 위험
 
 
+***Object 객체는 확장하지 않는 것이 바람직***
+
+***=> 모든 객체에 영향을 주기 때문***
+
+
+
+```javascript
+Object.prototype.contain = function(needle){ // 객체나 배열 안에 찾고자 하는 것이 있는 경우 true / 없는 경우 false
+    
+    for(var name in this){ // this(메소드 안에 this) => 메소드가 소속되어 있는 객체를 의(부모 object) 
+        if(this[name] === needle){
+            return true;
+        }
+    }
+    return false;
+}
+
+
+var o = {name: 'egoing', city: 'seoul'};
+
+var a = ['egoing', 'leezche', 'grapittie'];
+
+
+//-----
+
+
+for(var name in o){
+    console.log(name);
+}
+// name, city, contain
+// prototype에 추가한 메소드인 contain이 포함되어 있다.
+
+for(var name in a){
+    console.log(name);
+}
+// 0, 1, 2, contain
+// prototype에 추가한 메소드인 contain이 포함되어 있다.
+
+// Object 확장의 위험 => 모든 객체에 영향을 준다.
+
+
+//-----
+
+
+// 문제의 해결 => hasOwnProperty()
+for(var name in o){
+    if(o.hasOwnProperty(name)){
+        console.log(name);
+    }
+}
+// name, city
+// contain이 제거된다.
+
+for(var name in a){
+    if(a.hasOwnProperty(name)){
+        console.log(name);
+    }
+}
+// 0, 1, 2
+// contain이 제거된다.
+```
+
+***문제의 해결***
+
+***=> hasOwnProperty()***
+
+자신의 프로퍼티(property)를 가지고 있느냐라는 것을 체크
+
+
+
+
+
+---
+
+
+
+## 9. 데이터 타입
+
+
+
+### 원시데이터 타입과 객체
+
+
+
+<u>***데이터 타입 = 데이터 형태***</u>
+
+데이터 타입은 크게 2가지로 구분
+
+
+
+* 객체
+
+* 객체가 아닌 것 **(=> 원시 데이터 타입(primitive type))**
+
+  * ***숫자 (number)***
+  * ***문자열 (string)***
+  * ***불리언(true / false)***
+  * ***null***
+  * ***undefined***
+
+
+
+객체가 아닌 데이터 타입을 ***원시 데이터 타입(primitive type)***이라고 한다.
+
+***그 외의 모든 데이터 타입은 객체***
+
+
+
+<u>***원시(기본) 데이터 타입 VS 객체(참조) 데이터 타입***</u>
+
+
+
+
+
+### 레퍼객체
 
 
 
