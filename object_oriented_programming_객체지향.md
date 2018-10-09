@@ -623,7 +623,7 @@ Person.prototype.introduce = function(){
 function Programmer(name){
     this.name = name;
 }
-Programmers.prototype = new Person(); // 상속?
+Programmer.prototype = new Person(); // 상속?
 
 
 var p1 = new Programmer('egoing');
@@ -645,6 +645,463 @@ Programmer 객체도 메소드 introduce를 사용 가능
 
 
 ### 기능의 추가
+
+
+
+```javascript
+function Person(name){
+    this.name = name;
+}
+Person.prototype.name = null;
+Person.prototype.introduce = function(){
+    return 'My name is ' + this. name;
+}
+
+
+function Programmer(name){
+    this.name = name;
+}
+Programmer.prototype = new Person();
+Programmer.prototype.coding = function(){
+    return "hello world";
+}
+
+
+var p1 = new Programmer('egoing');
+document.write(p1.introduce()+"</br>");
+document.write(p1.coding()+"</br>");
+```
+
+Person은 introduce의 기능을 가지고 있다.
+
+*Programmer는 Person으로부터 introduce의 기능을 상속받았다.*
+
+*Programmer는 Person이 가지지 못한 coding이라는 기능을 가지고 있다.*
+
+***Programmer는 Person의 기능을 가지고 있으면서 Person이 가지고 있지 않은 기능인 메소드 coding을 가지고 있다.*** 
+
+
+
+tip.
+
+```javascript
+function Person(name){
+    this.name = name;
+}
+Person.prototype.name = null;
+Person.prototype.introduce = function(){
+    return 'My name is ' + this. name;
+}
+
+
+function Programmer(name){
+    this.name = name;
+}
+Programmer.prototype = new Person();
+Programmer.prototype.coding = function(){
+    return "hello world";
+}
+
+
+function Designer(name){
+    this.name = name;
+}
+Designer.prototype = new Person();
+Designer.prototype.design = function(){
+    return "beautiful!";
+}
+
+
+var p1 = new Programmer('egoing');
+document.write(p1.introduce()+"</br>");
+document.write(p1.coding()+"</br>");
+
+
+var p2 = new Designer('leezche');
+document.write(p2.introduce()+"</br>");
+document.write(p2.design()+"</br>");
+```
+
+
+
+tip.
+
+상속을 하는 코드를 변경하면 상속을 받는 코드도 전부 변경된다.
+
+
+
+
+
+---
+
+
+
+## 6. prototype
+
+
+
+상속의 연장
+
+
+
+### prototype이란?
+
+
+
+***prototype => 객체의 원형***
+
+***함수(function) => 객체(object)***
+
+그렇기 때문에 생성자로 사용될 함수도 객체
+
+객체는 프로퍼티(property)를 가질 수 있다
+
+prototype === property
+
+***prototype에 저장된 속성들은 생성자를 통해서 객체가 만들어질 때 그 객체에 연결된다. => 상속***
+
+
+
+```javascript
+function Ultra(){}
+Ultra.prototype.ultraProp = true;
+ 
+function Super(){}
+Super.prototype = new Ultra();
+ 
+function Sub(){}
+Sub.prototype = new Super();
+ 
+
+var o = new Sub();
+console.log(o.ultraProp); // true
+```
+
+***=> 이러한 개념을 prototype chain이라고 부른다***
+
+상속을 받기 위해서 생성자 사용?
+
+
+
+
+
+### prototype chain
+
+
+
+```javascript
+function Ultra(){}
+Ultra.prototype.ultraProp = true;
+ 
+function Super(){}
+Super.prototype = new Ultra();
+ 
+function Sub(){}
+Sub.prototype = new Super();
+ 
+
+var o = new Sub();
+o.ultraProp = 1;
+console.log(o.ultraProp); // 1
+
+
+//-----
+
+
+function Ultra(){}
+Ultra.prototype.ultraProp = true;
+ 
+function Super(){}
+Super.prototype = new Ultra();
+ 
+function Sub(){}
+Sub.prototype = new Super();
+Sub.prototype.ultraProp = 2;
+ 
+
+var o = new Sub();
+console.log(o.ultraProp); // 2
+
+
+//-----
+
+
+function Ultra(){}
+Ultra.prototype.ultraProp = true;
+ 
+function Super(){}
+Super.prototype = new Ultra();
+ 
+function Sub(){}
+var s = new Super();
+s.ultraProp = 3;
+Sub.prototype = s;
+
+var o = new Sub();
+console.log(o.ultraProp); // 3
+
+
+//-----
+
+
+function Ultra(){}
+Ultra.prototype.ultraProp = true;
+ 
+function Super(){}
+var t = new Ultra();
+t.ultraProp = 4;
+Super.prototype = t;
+ 
+function Sub(){}
+var s = new Super();
+Sub.prototype = s;
+
+var o = new Sub();
+console.log(o.ultraProp); // 4
+
+
+//-----
+
+
+function Ultra(){}
+Ultra.prototype.ultraProp = true;
+ 
+function Super(){}
+var t = new Ultra();
+Super.prototype = t;
+ 
+function Sub(){}
+var s = new Super();
+Sub.prototype = s;
+
+var o = new Sub();
+console.log(o.ultraProp); // true
+```
+
+생성자 Sub를 통해서 만들어진 객체 o가 Ultra의 프로퍼티 ultraProp에 접근 가능한 것은 prototype 체인으로 Sub와 Ultra가 연결되어 있기 때문이다. 내부적으로는 아래와 같은 일이 일어난다.
+
+1. *객체 o에서 ultraProp를 찾는다.*
+2. *없다면 Sub.prototype.ultraProp를 찾는다.*
+3. *없다면 Super.prototype.ultraProp를 찾는다.*
+4. *없다면 Ultra.prototype.ultraProp를 찾는다.*
+
+prototype는 객체와 객체를 연결하는 체인의 역할을 하는 것이다. 이러한 관계를 **prototype chain**이라고 한다.
+
+
+
+
+
+----
+
+
+
+## 7. 표준 내장 객체의 확장
+
+
+
+### 표준 내장 객체란?
+
+
+
+표준 내장 객체(Standard **Built-in** Object)
+
+=> JavaScript가 기본적으로 가지고 있는 객체들
+
+
+
+* Object
+* Function
+* Array
+* String
+* Boolean
+* Number
+* Math
+* Date
+* RegExp (정규표현식)
+
+
+
+***표준 내장 객체 <=> 사용자 정의 객체***
+
+
+
+
+
+### 배열의 확장
+
+
+
+배열의 확장(1)
+
+아래 코드는 배열에서 특정한 값을 랜덤하게 추출하는 코드
+
+```javascript
+var arr = new Array('seoul', 'new york', 'ladarkh', 'pusan', 'Tsukuba');
+
+function getRandomValueFromArray(arr){
+    var index = Math.floor(arr.length * Math.random());
+    return arr[index];
+}
+
+console.log(getRandomValueFromArray(arr));
+```
+
+
+
+배열의 확장(2)
+
+```javascript
+/*
+var arr = new Array('seoul', 'new york', 'ladarkh', 'pusan', 'Tsukuba');
+
+function getRandomValueFromArray(arr){
+    var index = Math.floor(arr.length * Math.random());
+    return arr[index];
+}
+
+console.log(getRandomValueFromArray(arr));
+*/
+
+
+//-----
+
+
+Array.prototype.random = function(){ // random이라는 메소드가 배열과 관련되어 있다는 것이 이해하기 쉬움 (가독성 증가)
+    
+    var index = Math.floor(this.length * Math.random()); // this는 새로 생성된 배열 객체
+    return this[index];
+    
+}
+
+var arr = new Array('seoul', 'new york', 'ladarkh', 'pusan', 'Tsukuba');
+
+console.log(arr.random());
+```
+
+***=> api를 사용자가 직접 정의할 수 있다는 장점***
+
+
+
+
+
+---
+
+
+
+## 8. Object
+
+
+
+### Object란?
+
+
+
+Object 객체는 객체의 가장 기본적인 형태를 가지고 있는 객체
+
+***=> 아무것도 상속받지 않는 순수한 객체***
+
+JavaScript에서 값을 저장하는 기본적인 단위로 Object를 사용
+
+```javascript
+var grades = {egoing: 10, k8805: 6, sorialgi: 80}
+```
+
+동시에 JavaScript의 모든 객체는 Object 객체를 상속받는데, 그런 이유로 **모든 객체는 Object 객체의 프로퍼티(property)를 가지고 있다.**
+
+
+
+참고)
+
+***prototype chain에서 Ultra는 Object 객체를 상속 받는다!!***
+
+
+
+
+
+### Object API 사용법
+
+
+
+<u>***prototype이 있고 없고의 차이에 집중***</u>
+
+
+
+* prototype (X)
+
+  ex) `Object.keys(arr)`
+
+  ***prototype이 없는 것은 인자로 어떠한 값을 받아서 처리***
+
+  `Object.keys(어떠한 인자)` => `Object.keys = function(){}`*
+
+  **=> 여기서 Object는 생성자 함수이다.**
+
+
+
+* prototype (O)
+
+  ex) `Object.prototype.toString()`
+
+  ***prototype이 있는 것은 어떠한 객체를 만든다.***
+
+  `객체를 담고 있는 식별자.toString` =>`Object.prototype.toString = function(){}`*
+
+  `a.toString()`
+
+  **=> 여기서 Object는 `new Object();`이다.**
+
+
+
+```javascript
+// Object.keys()
+
+var arr = ['a', 'b', 'c'];
+console.log('Object.keys(arr)', Object.keys(arr));
+
+// Object.keys = function(){}
+// Object => 생성자 함수
+
+
+//-----
+
+
+// Object.prototype.toString()
+
+var o = new Object();
+console.log('o.toString()', o.toString());
+
+var a = new Array(1,2,3);
+console.log('a.toString()', a.toString());
+
+// Object.prototype.toString = function(){}
+// Object => new Object();
+```
+
+***중요)***
+
+***=> prototype의 유무로 사용하는 방법이 다르다!!***
+
+
+
+
+
+### Object 확장
+
+
+
+
+
+
+
+
+
+### Object 확장의 위험
+
+
+
+
+
+
 
 
 
