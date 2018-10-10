@@ -1216,7 +1216,7 @@ for(var name in a){
 
   * ***숫자 (number)***
   * ***문자열 (string)***
-  * ***불리언(true / false)***
+  * ***불리언(Boolean : true / false)***
   * ***null***
   * ***undefined***
 
@@ -1238,7 +1238,185 @@ for(var name in a){
 
 
 
+**레퍼객체 (wrapper object)**
+
+원시 데이터 타입을 마치 객체처럼 사용하려고 할 때에 JavaScript 내부적으로 자동으로 만들어지는 객체
+
+=> 원시 데이터 타입을 객체로 감싸준다. 이러한 역할
 
 
 
+```javascript
+var str = 'coding';
+
+console.log(str.length); // 6
+
+console.log(str.charAt(0)); // "c"
+```
+
+문자열을 분명히 **프로퍼티**와 **메소드**가 있다.
+
+그렇다면 객체다.
+
+그런데 왜 문자열은 객체가 아니라고 할까?
+
+***=> 내부적으로 문자열이 원시 데이터 타입이고 문자열과 관련된 어떤 작업을 하려고 할 때 JavaScript는 임시로 문자열 객체를 만들고 사용이 끝나면 제거하기 때문이고 이러한 처리는 내부적으로 일어난다.***
+
+하지만 원시 데이터 타입과 객체는 좀 다른 동작 방법을 가지고 있기 때문에 분별한ㄴ 것이 필요
+
+
+
+```javascript
+var str = 'coding';
+
+str.prop = 'everybody';
+// 여기선 객체화
+// 이 작업이 끝나고 다시 원시 데이터 타입으로 변경되기 때문에 => undefined
+
+console.log(str.prop); // undefined
+```
+
+str.prop를 하는 순간에 JavaScript 내부적으로 String 객체가 만들어진다. prop 프로퍼티는 이 객체에 저장되고 이 객체는 곧 제거 된다. 그렇기 때문에 prop라는 속성이 저장된 객체는 존재하지 않게 된다.
+
+
+
+참고)
+
+***레퍼객체로는 String / Number / Boolean***
+
+***null / undefined는 레퍼객체가 존재하지 않는다.***
+
+
+
+
+
+---
+
+
+
+## 10. 참조
+
+
+
+***Key. 원시 데이터 타입인지 아닌지***
+
+
+
+### 복제
+
+
+
+<img width="646" alt="2018-10-10 8 45 22" src="https://user-images.githubusercontent.com/40155174/46734232-94b43480-cccd-11e8-9a01-731bbb55c801.png">
+
+
+
+```javascript
+var a = 1; // 변수에 담겨있는 값이 원시 데이터 타입
+var b = a; // b가 a를 복제 => b는 1을 가지고 있다.
+
+b = 2;
+
+console.log(a); // 1
+```
+
+***=> <u>원시 데이터 타입</u>일 때 이런 식으로 <u>복제</u>된다.***
+
+**=> 별도의 데이터**
+
+
+
+
+
+### 참조
+
+
+
+<img width="654" alt="2018-10-10 20 45 42" src="https://user-images.githubusercontent.com/40155174/46734265-adbce580-cccd-11e8-9523-7885643f2cda.png">
+
+
+
+참조(reference)
+
+```javascript
+var a = {id: 1};
+var b = a;
+
+b.id = 2;
+
+console.log(a.id); // 2
+```
+
+***=> <u>원시 데이터 타입이 아닌 경우</u> <u>참조</u>를 하기 때문에 값이 변한다.***
+
+**=> 하나의 데이터**
+
+
+
+
+
+### 함수와 참조
+
+
+
+**원시 데이터 타입**을 인자로 넘겼을 때의 동작 모습
+
+```javascript
+var a = 1;			// a = 1
+
+function func(b){ 	// b = a
+    b = 2;			// b = 2
+}
+
+func(a); // b = a
+
+console.log(a); // 1;
+```
+
+***=> 함수 안에서 b의 값을 2로 바꿔도 a에 담겨있는 값에는 어떠한 영향을 주지 않는다.***
+
+
+
+**참조 데이터 타입**을 인자로 넘겼을 때 동작 모습 - 1.
+
+```javascript
+var a = {id: 1};	// a = {id: 1};
+
+function func(b){	// b = a
+    b = {id: 2};	// b = {id: 2}; => 이 부분 때문에 b와 a의 링크는 끊어지게 된다.
+}
+
+func(a);
+console.log(a.id); // 1
+```
+
+***=> b는 새로운 객체를 만들고 b라는 변수에 할당했기 때문에 b는 새로운 객체를 바라보고 있다. 그래서 b와 a의 링크가 끊어지게 된다.***
+
+
+
+**참조 데이터 타입**을 인자로 넘겼을 때 다른 동작 모습 - 2.
+
+```javascript
+var a = {id: 1};	// a = {id: 1}
+
+function func(b){	// b = a
+    b.id = 2;		// b.id = 2
+}
+
+func(b);
+console.log(a.id); // 2
+```
+
+***=> b의 id 값을 변경하게 되면 같은 것을 참조하고 있기 때문에 a의 id 값도 변경된 효과가 나타난다.***
+
+
+
+* ***String / Number / Boolean은 객체처럼 사용할 수 있지만 원시 데이터 타입이라는 것을 숙지***
+
+  **=> 객체처럼 사용할 수 있는 것은 레퍼객체로 감싸져 있기 때문**
+
+
+
+
+
+---
 
