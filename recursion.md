@@ -16,6 +16,8 @@ function foo(){
 
 
 
+
+
 ***Iterative way***
 
 ```javascript
@@ -30,6 +32,8 @@ var factorial = function(number){
 
 
 
+
+
 ***Recursive way***
 
 ```javascript
@@ -41,7 +45,7 @@ var factorial = function(number){
 }
 ```
 
-=> recursion은 코드를 직관적으로 보여준다
+=> ***recursion***은 ***코드를 직관적으로*** 보여준다
 
 
 
@@ -63,9 +67,11 @@ function factorial(n){
 }
 ```
 
-=> Base Case를 항상 먼저 만들어 주어야 한다(무한 루프에 빠지지 않기 위해서)
+=> **Base Case**를 항상 먼저 만들어 주어야 한다(무한 루프에 빠지지 않기 위해서)
 
 (빠져나갈수 있도록 만들어준다)
+
+
 
 ```javascript
 var function_name = function(input){
@@ -88,7 +94,7 @@ var function_name = function(input){
 <u>EX.2 Fibonacci</u>
 
 ```javascript
-function fib(){
+function fib(n){
     
     if(n < 0/*termination_condition*/){
         return 0; // 예외처리
@@ -247,3 +253,22 @@ input : output,
 
 
 
+
+
+---
+
+
+
+**another cases (recursion을 사용하는 경우 ?)**
+
+
+
+* fibonacci number
+* tree traversal
+  * **finding a node**
+  * stringifyJSON
+  * getElementsByClassName
+
+
+
+17:00
