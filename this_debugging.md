@@ -149,11 +149,11 @@ tip. console.log();
 
 
 
-1. Global: window
-2. Function 호출: window
-3. Method 호출: 부모 object
-4. Construction mode(new 연산자로 생성된 function 영역의 this): 새로 생성된 객체
-5. .call or .apply 호출: call, apply의 첫 번째 인자로 명시 된 객체
+1. ***Global: <u>window</u>***
+2. ***Function 호출: <u>window</u>***
+3. ***Method 호출: <u>부모 object</u>***
+4. ***Construction mode(new 연산자로 생성된 function 영역의 this): <u>새로 생성된 객체</u>***
+5. ***.call or .apply 호출: call, apply의 <u>첫 번째 인자로 명시 된 객체</u>***
 
 
 
