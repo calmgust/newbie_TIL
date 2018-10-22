@@ -18,8 +18,6 @@
 
   * jQuery Events
 
-    
-
 * jQuery Effect
 
   * jQuery Hide / Show
@@ -35,8 +33,6 @@
   * jQuery Callback
 
   * jQuery Chaining
-
-    
 
 * jQuery HTML
 
@@ -54,8 +50,6 @@
 
   * jQuery Dimensions
 
-    
-
 * jQuery Traversing
 
   * jQuery Traversing
@@ -68,8 +62,6 @@
 
   * jQuery Filtering
 
-    
-
 * jQuery AJAX
 
   * jQuery AJAX Intro
@@ -78,13 +70,9 @@
 
   * jQuery Get / Post
 
-    
-
 * jQuery Misc
 
   * jQuery noConflict()
-
-    
 
 * jQuery Examples
 
@@ -93,8 +81,6 @@
   * jQuery Quiz
 
   * jQuery Certificate
-
-    
 
 * jQuery References
 
@@ -1946,7 +1932,7 @@ jQuery는 이러한 DOM을 간단하게 다룰 수 있는 장점이 있다. (***
 
 * ***text()*** - 선택한 요소의 텍스트 내용을 설정하거나 반환합니다.
 * ***html()*** - 선택한 요소의 내용을 설정하거나 반환합니다(HTML 마크 업 포함).
-* ***val()*** - 양식 필드의 값을 설정하거나 반환합니다.
+* ***val()*** - 양식 필드의 값을 설정하거나 반환합니다. <u>*입력 값?*</u>
 * ***attr()*** - href의 속성값을 가져오는 방법
 
 
@@ -2034,7 +2020,7 @@ $(document).ready(function(){
 </html>
 ```
 
-**val()** =>
+**val()** => 입력 값?
 
 Value: Mickey Mouse
 
@@ -3825,15 +3811,11 @@ $(document).ready(function(){
 
 * ***siblings()*** - 형제 요소를 반영
 
-  
-
 * ***next()*** - 선택한 요소의 다음 형제 요소
 
 * ***nextAll()*** - 선택한 요소의 다음 모든 형제 요소
 
 * ***nextUntil()*** - 주어진 두 인수 사이에 있는 모든 다음 형제 요소
-
-  
 
 * ***prev()*** - 선택한 요소의 이전 형제 요소
 
@@ -4133,11 +4115,7 @@ $(document).ready(function(){
 
 * ***last()*** - 지정된 요소의 마지막 요소를 반환
 
-  
-
 * ***eq()*** - 선택된 요소의 특정 인덱스 번호가 있는 요소를 반환
-
-  
 
 * ***filter()*** - 기준과 일치하지 않는 요소는 선택 항목에서 제거되고 일치하는 요소는 반환
 
@@ -4616,8 +4594,6 @@ $(document).ready(function(){
   (지정된 리소스에서 데이터를 요청합니다.)
 
   Ex) 검색엔진에서 검색하고 검색 결과를 받는 것
-
-  
 
 * **POST** - Submits data to be processed to a specified resource
 
