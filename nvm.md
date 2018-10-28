@@ -2,7 +2,7 @@
 
 
 
-## NVM 설치
+## nvm 설치
 
 
 
@@ -65,5 +65,37 @@ $ nvm ls
 ->       system
 node -> stable (-> N/A) (default)
 iojs -> N/A (default)
+```
+
+
+
+
+
+----
+
+
+
+## node 설치
+
+
+
+### 설치
+
+```
+$ nvm install v10.11.1
+```
+
+
+
+### 확인
+
+```
+$ nvm ls
+```
+
+
+
+```
+$ node -v
 ```
 
