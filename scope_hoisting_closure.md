@@ -4,6 +4,37 @@
 
 
 
+* 변수와 그 값이 어디서부터 어디까지가 유효한지를 판단하는 범위
+* scope는 변수 접근 규칙에 따른 **유효범위**를 의미
+* JavaScript에서는 함수가 선언되는(Lexical) 동시에 자신만의 scope를 가짐
+
+
+
+```javascript
+var greeting = 'Hello';
+
+function greetSomeone(){
+    var firstName = 'Josh';
+    return greeting + ' ' + firstName;
+}
+
+greetSomeone(); // => Hello Josh
+firstName; // => ReferenceError
+```
+
+
+
+
+
+##### Lexical(Static) Scope Vs. Dynamic Scope
+
+- Lexical(static) Scope: 유효범위가 코드를 작성될 때 결정됨
+- Dynamic Scope: 유효범위가 실행 순서에 의해 결정됨
+
+
+
+
+
 #### Global Scope(전역 변수)
 
 
@@ -19,7 +50,7 @@
 
 **ES5**
 
-함수 레벨 스코프(var 사용)
+함수 레벨 스코프(var 사용) => ***function(){함수 레벨}***
 
 ```javascript
 function foo(){
@@ -35,7 +66,7 @@ foo(); //함수 실행
 
 **ES6**
 
-블럭 레벨 스코프(let, const 사용)
+블럭 레벨 스코프(let, const 사용) => ***{블럭 레벨}***
 
 ```javascript
 function foo(){
