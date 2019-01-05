@@ -152,3 +152,55 @@ console.log(jb1);
 
 *`eval`을 써주지 않으면 입력 값을 `string`으로 해주어야 한다.*
 
+
+
+
+
+----
+
+
+
+## added nomad
+
+
+
+```js
+function greet (lang) { 
+  if (lang === 'spanish') {
+    return 'hola';
+  } else if (lang === 'korean') {
+    return 'annyeonghaseyo';
+  } else if (lang === 'greek') {
+    return 'giasu';
+  } else if (lang === 'italian') {
+    return 'chao';
+  } else if (lang === 'english') {
+    return 'hello';
+  } else { 
+    return 'don`t know that one';
+  }
+}
+
+greet('spanish');
+
+//-----
+
+function greet (lang) {
+    switch (lang) {
+        case 'spanish':
+            return 'hola';
+        case 'korean':
+            return 'annyeonghaseyo';
+        case 'greek':
+            return 'giazu';
+        case 'italian':
+            return 'chao';
+        case 'english':
+            return 'hello';
+        default:
+            return 'dont know that one';
+    }
+}
+
+```
+
